@@ -1,11 +1,10 @@
 export abstract class BaseError {
   abstract code: string;
-  name: string;
+  abstract name: string;
   message: string;
   stack?: string;
 
-  protected constructor(name: string, message: string, stack?: string) {
-    this.name = name;
+  protected constructor(message: string, stack?: string) {
     this.message = message;
     this.stack = stack;
   }
