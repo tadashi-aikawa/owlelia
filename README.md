@@ -1,5 +1,7 @@
 # Owlelia
 
+Utility for DDD 🦉
+
 [![npm version](https://badge.fury.io/js/owlelia.svg)](https://badge.fury.io/js/owlelia)
 [![Actions Status](https://github.com/tadashi-aikawa/owlelia/workflows/Tests/badge.svg)](https://github.com/tadashi-aikawa/owlelia/actions)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2d25fe948ba57717c578/test_coverage)](https://codeclimate.com/github/tadashi-aikawa/owlelia/test_coverage)
@@ -8,4 +10,18 @@
 
 <img src="./logo.svg" width=300 alt="logo" />
 
-- type-fest
+## Install
+
+```
+npm i owlelia
+```
+
+## Sample
+
+There are some sample codes which use _owlelia_ in `./sample`.
+
+You need to install other packages as following.
+
+- [type-fest](https://github.com/sindresorhus/type-fest)
+- [fp-ts](https://github.com/gcanti/fp-ts)
+- [dayjs](https://github.com/iamkun/dayjs)
