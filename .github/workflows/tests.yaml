@@ -42,7 +42,7 @@ jobs:
           url: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: Test report
-        if: matrix.node == "12.x" && success()
+        if: matrix.node == 12.x && success()
         env:
           CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
         run: |
