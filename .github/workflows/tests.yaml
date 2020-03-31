@@ -44,7 +44,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
         run: |
-          ./cc-test-reporter after-build
+          ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
 
       - name: "Slack notification (not success)"
         uses: homoluctus/slatify@master
