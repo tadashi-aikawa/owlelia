@@ -34,4 +34,6 @@ npm test
 npm version x.y.z
 npm run build
 npm publish
+git push --tags
+git push
 ```
