@@ -27,7 +27,24 @@ jobs:
 
       - run: npm install
       - run: npm run build
+
+      - name: Download test reporter
+        if: "matrix.node == '12.x'"
+        env:
+          CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+
       - run: npm test
+
+      - name: Send test report
+        if: "matrix.node == '12.x' && success()"
+        env:
+          CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
+        run: |
+          ./cc-test-reporter after-build
 
       - name: "Slack notification (not success)"
         uses: homoluctus/slatify@master
@@ -40,15 +57,6 @@ jobs:
           mention_if: always
           icon_emoji: "github"
           url: ${{ secrets.SLACK_WEBHOOK }}
-
-      - name: Test report
-        if: "matrix.node == '12.x' && success()"
-        env:
-          CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter after-build
 
   notify:
     needs: test
