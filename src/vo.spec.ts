@@ -30,6 +30,7 @@ describe("ClassName primitive vo", () => {
     expect(actual == ClassName.of("1-1")).toBeFalsy();
     expect(actual === ClassName.of("1-1")).toBeFalsy();
     expect(actual.equals(ClassName.of("1-2"))).toBeFalsy();
+    expect(actual.equals(undefined)).toBeFalsy();
 
     expect(actualList == ClassName.listOf(["1-1", "2-2"])).toBeFalsy();
     expect(actualList === ClassName.listOf(["1-1", "2-2"])).toBeFalsy();

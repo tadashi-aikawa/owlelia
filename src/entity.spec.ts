@@ -41,6 +41,8 @@ describe("Human entity", () => {
 
     expect(actual.equals(Human.of({ id: 2, name: "One" }))).toBeFalsy();
     expect(Human.of({ id: 2, name: "One" }).equals(actual)).toBeFalsy();
+
+    expect(actual.equals(undefined)).toBeFalsy;
   });
 
   test("is mutable", () => {
