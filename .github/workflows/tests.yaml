@@ -41,6 +41,15 @@ jobs:
           icon_emoji: "github"
           url: ${{ secrets.SLACK_WEBHOOK }}
 
+      - name: Test report
+        if: matrix.node == "12.x" && success()
+        env:
+          CC_TEST_REPORTER_ID: bb19187e89f28527a7836f01640e77e776cc7b497ecbd06faa0815e2fd4362a2
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter after-build
+
   notify:
     needs: test
     runs-on: ubuntu-latest
