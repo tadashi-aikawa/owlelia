@@ -25,3 +25,13 @@ You need to install other packages as following.
 - [type-fest](https://github.com/sindresorhus/type-fest)
 - [fp-ts](https://github.com/gcanti/fp-ts)
 - [dayjs](https://github.com/iamkun/dayjs)
+
+## Release
+
+```
+npm run build
+npm test
+npm version x.y.z
+npm run build
+npm publish
+```
