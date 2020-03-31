@@ -10,7 +10,7 @@ type Args = Merge<Props, { id: number }>;
 
 // There are same properties with Human
 export class Animal extends ValueObject<Props> {
-  _AnimalBrand!: never;
+  #voAnimalBrand!: never;
 
   static of(args: Args): Animal {
     return new Animal({ id: String(args.id), name: args.name });

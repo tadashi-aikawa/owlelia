@@ -16,7 +16,7 @@ type Args = Merge<
 >;
 
 export class ClassRoom extends ValueObject<Props> {
-  _ClassRoomBrand!: never;
+  #voClassRoomBrand!: never;
 
   static of(args: Args): ClassRoom {
     return new ClassRoom({

@@ -1,5 +1,5 @@
 import { Merge } from "type-fest";
-import { ValueObject } from "../../src/vo";
+import { Entity } from "../../src/entity";
 
 interface Props {
   id: string;
@@ -8,11 +8,11 @@ interface Props {
 
 type Args = Merge<Props, { id: number }>;
 
-export class Human extends ValueObject<Props> {
-  #voHumanBrand!: never;
+export class Human extends Entity<Props> {
+  #entityHumanBrand!: never;
 
   static of(args: Args): Human {
-    return new Human({ id: String(args.id), name: args.name });
+    return new Human(args.id, { id: String(args.id), name: args.name });
   }
 
   static listOf(argsList: Args[]): Human[] {
@@ -20,11 +20,10 @@ export class Human extends ValueObject<Props> {
   }
 
   get id(): string {
-    return this._value.id;
+    return this._props.id;
   }
 
-  // Only for test. Remove this in production codes.
   set id(id: string) {
-    this._value.id = id;
+    this._props.id = id;
   }
 }

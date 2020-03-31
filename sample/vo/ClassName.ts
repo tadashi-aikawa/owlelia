@@ -1,7 +1,7 @@
 import { PrimitiveValueObject } from "../../src/vo";
 
 export class ClassName extends PrimitiveValueObject<string> {
-  _ClassNameBrand!: never;
+  #voClassNameBrand!: never;
 
   static of(value: string): ClassName {
     return new ClassName(value);

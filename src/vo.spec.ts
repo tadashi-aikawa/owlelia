@@ -34,16 +34,6 @@ describe("ClassName primitive vo", () => {
     expect(actualList == ClassName.listOf(["1-1", "2-2"])).toBeFalsy();
     expect(actualList === ClassName.listOf(["1-1", "2-2"])).toBeFalsy();
   });
-
-  test("is immutable", () => {
-    expect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      actual.value = "1234567";
-    }).toThrowError(
-      "Cannot set property value of #<PrimitiveValueObject> which has only a getter"
-    );
-  });
 });
 
 describe("Human simple vo", () => {
@@ -78,11 +68,9 @@ describe("Human simple vo", () => {
 
   test("is immutable", () => {
     expect(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
       actual.id = "1234567";
     }).toThrowError(
-      "Cannot set property id of #<Human> which has only a getter"
+      "Cannot assign to read only property 'id' of object '#<Object>'"
     );
   });
 });
