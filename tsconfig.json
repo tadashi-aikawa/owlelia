@@ -63,5 +63,6 @@
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "newLine": "lf"
-  }
+  },
+  "exclude": ["dist", "node_modules", "**/*.spec.ts"]
 }

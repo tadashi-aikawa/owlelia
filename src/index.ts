@@ -1,7 +1,12 @@
-export function plus(a: number, b: number, c: number): number {
-  return a + b + c;
-}
+import { BaseError } from "./error";
+import { Entity } from "./entity";
 
-export function minus(a: number, b: number, c: number): number {
-  return a - b - c;
+type ErrorCode = "a" | "b";
+
+class ConcreteError extends BaseError {
+  code: ErrorCode = "a";
+
+  static of(args: { name: string; message: string }): ConcreteError {
+    return new ConcreteError(args.name, args.message);
+  }
 }
