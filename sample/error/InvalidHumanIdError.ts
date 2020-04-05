@@ -1,4 +1,5 @@
-import { BaseError } from "../../src/error";
+import { BaseError } from "../../src";
+import { ErrorCode } from "./ErrorCode";
 
 export class InvalidHumanIdError extends BaseError {
   code: ErrorCode = "INVALID_HUMAN_ID";

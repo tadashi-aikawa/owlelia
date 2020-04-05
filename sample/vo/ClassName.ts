@@ -1,4 +1,4 @@
-import { PrimitiveValueObject } from "../../src/vo";
+import { PrimitiveValueObject } from "../../src";
 
 export class ClassName extends PrimitiveValueObject<string> {
   #voClassNameBrand!: never;

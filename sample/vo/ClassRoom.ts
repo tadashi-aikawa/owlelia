@@ -1,5 +1,5 @@
 import { Merge } from "type-fest";
-import { ValueObject } from "../../src/vo";
+import { ValueObject } from "../../src";
 import { ClassName } from "./ClassName";
 import { Human } from "./Human";
 

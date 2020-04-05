@@ -1,5 +1,5 @@
 import { Merge } from "type-fest";
-import { Entity } from "../../src/entity";
+import { Entity } from "../../src";
 
 interface Props {
   id: string;

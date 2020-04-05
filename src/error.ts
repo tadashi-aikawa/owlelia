@@ -9,5 +9,3 @@ export abstract class BaseError {
     this.stack = stack;
   }
 }
-
-export type MaybeError = BaseError | undefined;
