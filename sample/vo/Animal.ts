@@ -2,21 +2,25 @@ import { Merge } from "type-fest";
 import { ValueObject } from "../../src";
 
 interface Props {
-  id: string;
+  kind: string;
   name: string;
 }
 
-type Args = Merge<Props, { id: number }>;
+type Args = Merge<Props, { kind?: string }>;
 
-// There are same properties with Human
 export class Animal extends ValueObject<Props> {
   #voAnimalBrand!: never;
 
   static of(args: Args): Animal {
-    return new Animal({ id: String(args.id), name: args.name });
+    return new Animal({ kind: args.kind ?? "unknown", name: args.name });
   }
 
-  get id(): string {
-    return this._value.id;
+  get kind(): string {
+    return this._value.kind;
+  }
+
+  // Only for test. Remove this in production codes.
+  set kind(kind: string) {
+    this._value.kind = kind;
   }
 }

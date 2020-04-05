@@ -1,52 +1,80 @@
-import { Human } from "../sample/entity/Human";
+import { Spot } from "../sample/entity/Spot";
+import { Coordinate } from "../sample/vo/Coordinate";
+import { SpotId } from "../sample/vo/SpotId";
 
-describe("Human entity", () => {
-  let actual: Human;
-  let actualList: Human[];
+describe("Spot entity", () => {
+  let actual: Spot;
+  let actualList: Spot[];
 
   beforeAll(() => {
-    actual = Human.of({
-      id: 1,
-      name: "One",
+    actual = Spot.of({
+      id: "s1",
+      name: "Spot1",
+      location: Coordinate.of({ lat: 35, lon: 135 }),
     });
-    actualList = Human.listOf([
-      { id: 1, name: "One" },
-      { id: 2, name: "Two" },
+    actualList = Spot.listOf([
+      {
+        id: "s1",
+        name: "Spot1",
+        location: Coordinate.of({ lat: 35, lon: 135 }),
+      },
+      {
+        id: "s2",
+        name: "Spot2",
+        pastLocations: [Coordinate.of({ lat: 36, lon: 136 })],
+      },
     ]);
   });
 
   test("can created by of", () => {
-    expect(actual.id).toBe("1");
+    expect(actual.id).toStrictEqual(SpotId.of("s1"));
   });
 
   test("can created by listOf", () => {
-    expect(actualList.map((x) => x.id)).toStrictEqual(["1", "2"]);
-  });
-
-  test("equals the other if entityId are same", () => {
-    expect(actual.equals(Human.of({ id: 1, name: "Two" }))).toBeTruthy();
-    expect(Human.of({ id: 1, name: "Two" }).equals(actual)).toBeTruthy();
-
-    expect(actualList).toStrictEqual(
-      Human.listOf([
-        { id: 1, name: "One" },
-        { id: 2, name: "Two" },
-      ])
+    expect(actualList.map((x) => x.id)).toStrictEqual(
+      SpotId.listOf(["s1", "s2"])
     );
   });
 
-  test("not equals others", () => {
-    expect(actual == Human.of({ id: 1, name: "Two" })).toBeFalsy();
-    expect(actual === Human.of({ id: 1, name: "Two" })).toBeFalsy();
+  test("equals the other if entityId are same", () => {
+    const sameIdentity = Spot.of({
+      id: "s1",
+      name: "hoge",
+    });
 
-    expect(actual.equals(Human.of({ id: 2, name: "One" }))).toBeFalsy();
-    expect(Human.of({ id: 2, name: "One" }).equals(actual)).toBeFalsy();
+    expect(actual.equals(sameIdentity)).toBeTruthy();
+    expect(sameIdentity.equals(actual)).toBeTruthy();
+  });
+
+  test("not equals others", () => {
+    const sameIdentity = Spot.of({
+      id: "s1",
+      name: "Spot1",
+    });
+
+    expect(actual == sameIdentity).toBeFalsy();
+    expect(actual === sameIdentity).toBeFalsy();
+
+    expect(
+      actual.equals(
+        Spot.of({
+          id: "hoge",
+          name: "Spot1",
+        })
+      )
+    ).toBeFalsy();
+    expect(
+      Spot.of({
+        id: "hoge",
+        name: "Spot1",
+      }).equals(actual)
+    ).toBeFalsy();
 
     expect(actual.equals(undefined)).toBeFalsy;
   });
 
   test("is mutable", () => {
-    actual.id = "456";
-    expect(actual.id).toBe("456");
+    actual.id = SpotId.of("456");
+    expect(actual.id).toStrictEqual(SpotId.of("456"));
   });
 });
