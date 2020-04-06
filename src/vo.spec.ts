@@ -2,14 +2,15 @@ import { SpotId } from "../sample/vo/SpotId";
 import { Animal } from "../sample/vo/Animal";
 import { CoordinatePair } from "../sample/vo/CoordinatePair";
 import { Coordinate } from "../sample/vo/Coordinate";
+import { forceLeft, forceRight } from "../sample/utils";
 
 describe("Primitive VO(SpotId)", () => {
   let actual: SpotId;
   let actualList: SpotId[];
 
   beforeAll(() => {
-    actual = SpotId.of("100");
-    actualList = SpotId.listOf(["100", "200"]);
+    actual = forceRight(SpotId.of("100"));
+    actualList = forceRight(SpotId.listOf(["100", "200"]));
   });
 
   test("can created by of", () => {
@@ -21,20 +22,30 @@ describe("Primitive VO(SpotId)", () => {
   });
 
   test("equals the other", () => {
-    expect(actual.equals(SpotId.of("100"))).toBeTruthy();
-    expect(SpotId.of("100").equals(actual)).toBeTruthy();
+    const sameValue = forceRight(SpotId.of("100"));
+    expect(actual.equals(sameValue)).toBeTruthy();
+    expect(sameValue.equals(actual)).toBeTruthy();
 
-    expect(actualList).toStrictEqual(SpotId.listOf(["100", "200"]));
+    const sameValueList = forceRight(SpotId.listOf(["100", "200"]));
+    expect(actualList).toStrictEqual(sameValueList);
   });
 
   test("not equals others", () => {
-    expect(actual == SpotId.of("100")).toBeFalsy();
-    expect(actual === SpotId.of("100")).toBeFalsy();
-    expect(actual.equals(SpotId.of("101"))).toBeFalsy();
+    const sameValue = forceRight(SpotId.of("100"));
+    expect(actual == sameValue).toBeFalsy();
+    expect(actual === sameValue).toBeFalsy();
+    expect(actual.equals(forceRight(SpotId.of("101")))).toBeFalsy();
     expect(actual.equals(undefined)).toBeFalsy();
 
-    expect(actualList == SpotId.listOf(["100", "200"])).toBeFalsy();
-    expect(actualList === SpotId.listOf(["100", "200"])).toBeFalsy();
+    const sameValueList = forceRight(SpotId.listOf(["100", "200"]));
+    expect(actualList == sameValueList).toBeFalsy();
+    expect(actualList === sameValueList).toBeFalsy();
+  });
+
+  test("has invalid spotId", () => {
+    const invalidErr = forceLeft(SpotId.of("1234567"));
+    expect(invalidErr.length).toBe(1);
+    expect(invalidErr[0].code).toBe("INVALID_SPOT_ID");
   });
 });
 
