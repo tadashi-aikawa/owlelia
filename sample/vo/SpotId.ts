@@ -1,7 +1,6 @@
-import { Either, left, right } from "fp-ts/lib/Either";
 import { PrimitiveValueObject } from "../../src";
 import { SampleError } from "../error/SampleError";
-import { foldEithers } from "../utils";
+import { aggregate, Either, right, left } from "../../src/either";
 
 export class InvalidSpotIdError extends SampleError {
   code = "INVALID_SPOT_ID";
@@ -18,13 +17,21 @@ export class InvalidSpotIdError extends SampleError {
 export class SpotId extends PrimitiveValueObject<string> {
   #voSpotIdBrand!: never;
 
-  static of(value: string): Either<SampleError[], SpotId> {
+  static try(value: string): Either<SampleError[], SpotId> {
     return value.length <= 4
       ? right(new SpotId(value))
       : left([InvalidSpotIdError.of({ invalidId: value })]);
   }
 
-  static listOf(values: string[]): Either<SampleError[], SpotId[]> {
-    return foldEithers(values.map(SpotId.of));
+  static of(value: string): SpotId {
+    return SpotId.try(value).orThrow();
+  }
+
+  static listTry(values: string[]): Either<SampleError[], SpotId[]> {
+    return aggregate(values.map(SpotId.try));
+  }
+
+  static listOf(values: string[]): SpotId[] {
+    return values.map(SpotId.of);
   }
 }

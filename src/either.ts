@@ -1,5 +1,3 @@
-import { UnexpectedLeftError } from "./error";
-
 class Left<E, T> {
   #type = "left" as const;
   constructor(public error: E) {}
@@ -24,8 +22,8 @@ class Left<E, T> {
     return new Left(this.error);
   }
 
-  get forceValue(): T {
-    throw UnexpectedLeftError.of({ left: this.error });
+  orThrow(): T {
+    throw this.error;
   }
 }
 
@@ -53,7 +51,7 @@ class Right<E, T> {
     return new Right(functor(this.value));
   }
 
-  get forceValue(): T {
+  orThrow(): T {
     return this.value;
   }
 }

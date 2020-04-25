@@ -37,7 +37,6 @@
     "@typescript-eslint/parser": "^2.25.0",
     "babel-jest": "^25.2.4",
     "eslint": "^6.8.0",
-    "fp-ts": "^2.5.3",
     "jest": "^25.2.4",
     "prettier": "^2.0.2",
     "type-fest": "^0.12.0",

@@ -1,5 +1,5 @@
-import { right, left, Either, aggregate } from "./either";
-import { BaseError, UnexpectedLeftError } from "./error";
+import { aggregate, Either, left, right } from "./either";
+import { BaseError } from "./error";
 
 export class TestError extends BaseError {
   code = "TEST_ERROR";
@@ -45,9 +45,9 @@ describe("Either -> Right", () => {
     expect(actual._left).toBeUndefined();
   });
 
-  test("get value by forceValue", () => {
+  test("get value by orThrow", () => {
     const actual = getEither({ value: "hoge" });
-    expect(actual.forceValue).toBe("hoge");
+    expect(actual.orThrow()).toBe("hoge");
   });
 });
 
@@ -81,12 +81,12 @@ describe("Either -> Left", () => {
     expect(actual._right).toBeUndefined();
   });
 
-  test("throw UnexpectedLeftError by forceValue", () => {
+  test("throw Error by orThrow", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getEither({ error });
     expect(() => {
-      actual.forceValue;
-    }).toThrow(UnexpectedLeftError.of({ left: error }));
+      actual.orThrow();
+    }).toThrow(error);
   });
 });
 

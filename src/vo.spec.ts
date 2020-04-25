@@ -2,15 +2,14 @@ import { SpotId } from "../sample/vo/SpotId";
 import { Animal } from "../sample/vo/Animal";
 import { CoordinatePair } from "../sample/vo/CoordinatePair";
 import { Coordinate } from "../sample/vo/Coordinate";
-import { forceLeft, forceRight } from "../sample/utils";
 
 describe("Primitive VO(SpotId)", () => {
   let actual: SpotId;
   let actualList: SpotId[];
 
   beforeAll(() => {
-    actual = forceRight(SpotId.of("100"));
-    actualList = forceRight(SpotId.listOf(["100", "200"]));
+    actual = SpotId.of("100");
+    actualList = SpotId.listOf(["100", "200"]);
   });
 
   test("can created by of", () => {
@@ -22,30 +21,47 @@ describe("Primitive VO(SpotId)", () => {
   });
 
   test("equals the other", () => {
-    const sameValue = forceRight(SpotId.of("100"));
+    const sameValue = SpotId.of("100");
     expect(actual.equals(sameValue)).toBeTruthy();
     expect(sameValue.equals(actual)).toBeTruthy();
 
-    const sameValueList = forceRight(SpotId.listOf(["100", "200"]));
+    const sameValueList = SpotId.listOf(["100", "200"]);
     expect(actualList).toStrictEqual(sameValueList);
   });
 
   test("not equals others", () => {
-    const sameValue = forceRight(SpotId.of("100"));
+    const sameValue = SpotId.of("100");
     expect(actual == sameValue).toBeFalsy();
     expect(actual === sameValue).toBeFalsy();
-    expect(actual.equals(forceRight(SpotId.of("101")))).toBeFalsy();
+    expect(actual.equals(SpotId.of("101"))).toBeFalsy();
     expect(actual.equals(undefined)).toBeFalsy();
 
-    const sameValueList = forceRight(SpotId.listOf(["100", "200"]));
+    const sameValueList = SpotId.listOf(["100", "200"]);
     expect(actualList == sameValueList).toBeFalsy();
     expect(actualList === sameValueList).toBeFalsy();
   });
 
   test("has invalid spotId", () => {
-    const invalidErr = forceLeft(SpotId.of("1234567"));
-    expect(invalidErr.length).toBe(1);
-    expect(invalidErr[0].code).toBe("INVALID_SPOT_ID");
+    const actual = SpotId.try("1234567");
+    if (!actual.isLeft()) {
+      fail("actual must be Left!");
+    }
+
+    expect(actual.error.length).toBe(1);
+    expect(actual.error[0].code).toBe("INVALID_SPOT_ID");
+  });
+
+  test("has invalid spotIds", () => {
+    const actual = SpotId.listTry(["123", "12345", "1234567"]);
+    if (!actual.isLeft()) {
+      fail("actual must be Left!");
+    }
+
+    expect(actual.error.length).toBe(2);
+    expect(actual.error.map((x) => x.message)).toStrictEqual([
+      "SpotのIDは4桁以下でなければいけません。12345は5桁であるため不正値です",
+      "SpotのIDは4桁以下でなければいけません。1234567は7桁であるため不正値です",
+    ]);
   });
 });
 
