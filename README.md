@@ -1,4 +1,5 @@
-# Owlelia
+Owlelia
+=======
 
 Utility for DDD 🦉
 
@@ -10,29 +11,43 @@ Utility for DDD 🦉
 
 <img src="https://github.com/tadashi-aikawa/owlelia/raw/master/logo.svg?sanitize=true" width=300 alt="logo" />
 
-## Install
+
+Install
+-------
 
 ```
 npm i owlelia
 ```
 
-## Sample
+
+Sample
+------
 
 There are some sample codes which use _owlelia_ in `./sample`.
 
 You need to install other packages as following.
 
 - [type-fest](https://github.com/sindresorhus/type-fest)
-- [dayjs](https://github.com/iamkun/dayjs)
 
-## Release
+
+For developers
+--------------
+
+### Requirements
+
+Node.js >= 0.12 
+
+### Develop
 
 ```
-npm run build
-npm test
-npm version x.y.z
-npm run build
-npm publish
-git push --tags
-git push
+# Install dependencies
+make init-develop
+# Test
+make test
+```
+
+### Release
+
+```
+make release version=x.y.z
 ```
