@@ -6,6 +6,7 @@ import { Coordinate } from "../vo/Coordinate";
 import { Either, map } from "fp-ts/lib/Either";
 import { foldEithers } from "../utils";
 import { SampleError } from "../error/SampleError";
+import {monadThrow} from "fp-ts";
 
 interface Props {
   id: SpotId;
@@ -30,7 +31,7 @@ export class Spot extends Entity<Props> {
             location: args.location,
             pastLocations: args.pastLocations,
           })
-      )
+      ),
     );
   }
 
