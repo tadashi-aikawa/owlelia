@@ -14,15 +14,15 @@ guard-%:
 	fi
 
 .PHONY: init-develop
-init-develop:
+init-develop: ## Install dependencies
 	npm install
 
 .PHONY: build
-build:
+build: ## Build
 	npm run build
 
 .PHONY: test
-test:
+test: ## Run test
 	npm run test
 
 .PHONY: release
