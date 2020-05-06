@@ -1,5 +1,5 @@
 class Left<E, T> {
-  #type = "left" as const;
+  private _type = "left" as const;
   constructor(public error: E) {}
 
   isLeft(): this is Left<E, T> {
@@ -28,7 +28,7 @@ class Left<E, T> {
 }
 
 class Right<E, T> {
-  #type = "right" as const;
+  private _type = "right" as const;
   constructor(public value: T) {}
 
   isLeft(): this is Left<E, T> {
