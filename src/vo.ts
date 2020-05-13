@@ -23,7 +23,7 @@ export abstract class ValueObject<
 > extends AbstractValueObject<T> {}
 
 export abstract class PrimitiveValueObject<T> extends AbstractValueObject<T> {
-  get value(): T {
+  unwrap(): T {
     return this._value;
   }
 }

@@ -15,7 +15,7 @@ export class Spot extends Entity<Props> {
   #entitySpotBrand!: never;
 
   static of(args: Args): Spot {
-    return new Spot(args.id.value, {
+    return new Spot(args.id.unwrap(), {
       id: args.id,
       name: args.name,
       location: args.location,

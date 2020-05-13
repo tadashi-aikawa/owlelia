@@ -13,11 +13,11 @@ describe("Primitive VO(SpotId)", () => {
   });
 
   test("can created by of", () => {
-    expect(actual.value).toBe("100");
+    expect(actual.unwrap()).toBe("100");
   });
 
   test("can created by listOf", () => {
-    expect(actualList.map((x) => x.value)).toStrictEqual(["100", "200"]);
+    expect(actualList.map((x) => x.unwrap())).toStrictEqual(["100", "200"]);
   });
 
   test("equals the other", () => {
