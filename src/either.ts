@@ -23,7 +23,10 @@ class Left<E, T> {
   }
 
   or(value: T): T {
-    return value
+    return value;
+  }
+  orUndefined(): T | undefined {
+    return undefined;
   }
   orThrow(): T {
     throw this.error;
@@ -56,7 +59,10 @@ class Right<E, T> {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   or(value: T): T {
-    return this.value
+    return this.value;
+  }
+  orUndefined(): T | undefined {
+    return this.value;
   }
   orThrow(): T {
     return this.value;

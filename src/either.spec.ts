@@ -50,6 +50,11 @@ describe("Either -> Right", () => {
     expect(actual.or("alternative")).toBe("hoge");
   });
 
+  test("get value by orUndefined", () => {
+    const actual = getEither({ value: "hoge" });
+    expect(actual.orUndefined()).toBe("hoge");
+  });
+
   test("get value by orThrow", () => {
     const actual = getEither({ value: "hoge" });
     expect(actual.orThrow()).toBe("hoge");
@@ -90,6 +95,12 @@ describe("Either -> Left", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getEither({ error });
     expect(actual.or("alternative")).toBe("alternative");
+  });
+
+  test("get undefined by orUndefined", () => {
+    const error = TestError.of({ invalidReason: "expected" });
+    const actual = getEither({ error });
+    expect(actual.orUndefined()).toBeUndefined;
   });
 
   test("throw Error by orThrow", () => {
