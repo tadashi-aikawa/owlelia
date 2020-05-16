@@ -22,6 +22,9 @@ class Left<E, T> {
     return new Left(this.error);
   }
 
+  or(value: T): T {
+    return value
+  }
   orThrow(): T {
     throw this.error;
   }
@@ -51,6 +54,10 @@ class Right<E, T> {
     return new Right(functor(this.value));
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  or(value: T): T {
+    return this.value
+  }
   orThrow(): T {
     return this.value;
   }
