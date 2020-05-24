@@ -8,8 +8,7 @@ export class InvalidSpotIdError extends SampleError {
 
   static of(args: { invalidId: string; stack?: string }): InvalidSpotIdError {
     return new InvalidSpotIdError(
-      `SpotのIDは4桁以下でなければいけません。${args.invalidId}は${args.invalidId.length}桁であるため不正値です`,
-      args.stack
+      `SpotのIDは4桁以下でなければいけません。${args.invalidId}は${args.invalidId.length}桁であるため不正値です`
     );
   }
 }

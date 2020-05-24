@@ -26,6 +26,7 @@ describe("InvalidSpotIdError", () => {
     expect(invalidErr.message).toBe(
       `SpotのIDは4桁以下でなければいけません。77777は5桁であるため不正値です`
     );
-    expect(invalidErr.stack).toBe("stackmessage");
+    expect(invalidErr.stack).toMatch("無効なSpotのID: SpotのIDは4桁以下でなければいけません。77777は5桁であるため不正値です");
+    expect(invalidErr.stack).toMatch("at ");
   });
 });
