@@ -9,7 +9,7 @@ interface Props {
 type Args = Props;
 
 export class CoordinatePair extends ValueObject<Props> {
-  #voCoordinatePairBrand!: never;
+  _voCoordinatePairBrand!: never;
 
   static of(args: Args): CoordinatePair {
     return new CoordinatePair({

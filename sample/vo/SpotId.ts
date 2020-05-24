@@ -15,7 +15,7 @@ export class InvalidSpotIdError extends SampleError {
 }
 
 export class SpotId extends PrimitiveValueObject<string> {
-  #voSpotIdBrand!: never;
+  _voSpotIdBrand!: never;
 
   static try(value: string): Either<SampleError[], SpotId> {
     return value.length <= 4

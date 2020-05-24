@@ -12,7 +12,7 @@ interface Props {
 type Args = Props;
 
 export class Spot extends Entity<Props> {
-  #entitySpotBrand!: never;
+  _entitySpotBrand!: never;
 
   static of(args: Args): Spot {
     return new Spot(args.id.unwrap(), {

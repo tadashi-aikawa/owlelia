@@ -8,7 +8,7 @@ interface Props {
 type Args = Props;
 
 export class Coordinate extends ValueObject<Props> {
-  #voCoordinateBrand!: never;
+  _voCoordinateBrand!: never;
 
   static of(args: Args): Coordinate {
     return new Coordinate({ lat: args.lat, lon: args.lon });

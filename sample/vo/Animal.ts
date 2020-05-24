@@ -9,7 +9,7 @@ interface Props {
 type Args = Merge<Props, { kind?: string }>;
 
 export class Animal extends ValueObject<Props> {
-  #voAnimalBrand!: never;
+  _voAnimalBrand!: never;
 
   static of(args: Args): Animal {
     return new Animal({ kind: args.kind ?? "unknown", name: args.name });
