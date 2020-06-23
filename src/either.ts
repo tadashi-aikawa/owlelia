@@ -28,6 +28,9 @@ class Left<E, T> {
   orUndefined(): T | undefined {
     return undefined;
   }
+  orNull(): T | null {
+    return null;
+  }
   orThrow(): T {
     throw this.error;
   }
@@ -62,6 +65,9 @@ class Right<E, T> {
     return this.value;
   }
   orUndefined(): T | undefined {
+    return this.value;
+  }
+  orNull(): T | null {
     return this.value;
   }
   orThrow(): T {
