@@ -21,6 +21,9 @@ class Left<E, T> {
   mapRight<TR>(functor: (value: T) => TR): Either<E, TR> {
     return new Left(this.error);
   }
+  biMap<ER, TR>(leftFunctor: (err: E) => ER, rightFunctor: (value: T) => TR): Either<ER, TR> {
+    return this.mapLeft(leftFunctor).mapRight(rightFunctor)
+  }
 
   or(value: T): T {
     return value;
@@ -58,6 +61,9 @@ class Right<E, T> {
   }
   mapRight<TR>(functor: (value: T) => TR): Either<E, TR> {
     return new Right(functor(this.value));
+  }
+  biMap<ER, TR>(leftFunctor: (err: E) => ER, rightFunctor: (value: T) => TR): Either<ER, TR> {
+    return this.mapLeft(leftFunctor).mapRight(rightFunctor)
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

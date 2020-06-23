@@ -45,6 +45,13 @@ describe("Either -> Right", () => {
     expect(actual._left).toBeUndefined();
   });
 
+  test("transform value by biMap", () => {
+    const actual = getEither({ value: 3 }).biMap(err => err.message, (x) => x * 2);
+
+    expect(actual._right).toBe(6);
+    expect(actual._left).toBeUndefined();
+  });
+
   test("get value by or", () => {
     const actual = getEither({ value: "hoge" });
     expect(actual.or("alternative")).toBe("hoge");
@@ -93,6 +100,14 @@ describe("Either -> Left", () => {
     const actual = getEither<number>({ error }).mapRight((x) => x * 2);
 
     expect(actual._left).toBe(error);
+    expect(actual._right).toBeUndefined();
+  });
+
+  test("transform error by biMap", () => {
+    const error = TestError.of({ invalidReason: "expected" });
+    const actual = getEither<number>({ error }).biMap(err => err.message, (x) => x * 2);
+
+    expect(actual._left).toBe("失敗の理由: expected");
     expect(actual._right).toBeUndefined();
   });
 
