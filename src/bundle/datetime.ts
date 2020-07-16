@@ -2,8 +2,6 @@ import { ValueObject } from "../vo";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 
-dayjs.locale("ja");
-
 /**
  * HH:mm:ss -> seconds
  * ex
