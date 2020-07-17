@@ -2,18 +2,7 @@ import { ValueObject } from "../vo";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 
-/**
- * HH:mm:ss -> seconds
- * ex
- *   00:02:11 -> 131
- * @param time
- */
-function toSeconds(time: string): number {
-  const [hours, minutes, seconds] = time.split(":").map(Number);
-  return hours * 60 * 60 + minutes * 60 + seconds;
-}
-
-const pad00 = (v: number) => String(v).padStart(2, "0");
+const pad00 = (v: number): string => String(v).padStart(2, "0");
 
 /**
  * seconds -> HH:mm:ss
@@ -44,17 +33,6 @@ function toJapanese(time: string): string {
   ]
     .filter((x) => x)
     .join("");
-}
-
-/**
- * seconds -> Japanese format
- * ex
- *   48 -> 48秒
- *   131 -> 2分 (Ignore seconds in the case seconds >= 60)
- * @param format
- */
-function toJapaneseFromSecond(seconds: number): string {
-  return toJapanese(toHHmmss(seconds));
 }
 
 export class DateTime extends ValueObject<dayjs.Dayjs> {
@@ -92,12 +70,20 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return new DateTime(this._value.subtract(minutes, "minute"));
   }
 
+  get diffMinutesFromNow(): number {
+    return DateTime.now()._value.diff(this._value, "minute");
+  }
+
+  get diffSecondsFromNow(): number {
+    return DateTime.now()._value.diff(this._value, "second");
+  }
+
   displayDiffFromNow(): string {
-    return toHHmmss(dayjs().diff(this._value, "second"));
+    return toHHmmss(DateTime.now()._value.diff(this._value, "second"));
   }
 
   within(seconds: number): boolean {
-    return dayjs().diff(this._value, "second") <= seconds;
+    return DateTime.now()._value.diff(this._value, "second") <= seconds;
   }
 
   equalsAsDate(dateTime: DateTime): boolean {

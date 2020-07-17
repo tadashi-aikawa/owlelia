@@ -1,4 +1,5 @@
 import { DateTime } from "./datetime";
+import MockDate from "mockdate";
 
 describe("DateTime", () => {
   describe.each`
@@ -33,6 +34,30 @@ describe("DateTime", () => {
       expect(DateTime.of(self).plusSeconds(seconds).rfc3339).toMatch(
         new RegExp(`^${expected}.+`)
       );
+    });
+  });
+
+  describe.each`
+    now                      | self                     | expected
+    ${"2020-01-01 10:03:00"} | ${"2020-01-01 10:00:00"} | ${3}
+    ${"2020-01-01 10:03:01"} | ${"2020-01-01 10:00:00"} | ${3}
+    ${"2020-01-01 10:02:59"} | ${"2020-01-01 10:00:00"} | ${2}
+  `("diffMinutesFromNow", ({ now, self, expected }) => {
+    test(`(${self}).diffMinutesFromNow()(now = ${now}) = ${expected}`, () => {
+      MockDate.set(now);
+      expect(DateTime.of(self).diffMinutesFromNow).toBe(expected);
+    });
+  });
+
+  describe.each`
+    now                      | self                     | expected
+    ${"2020-01-01 10:03:00"} | ${"2020-01-01 10:00:00"} | ${180}
+    ${"2020-01-01 10:03:01"} | ${"2020-01-01 10:00:00"} | ${181}
+    ${"2020-01-01 10:02:59"} | ${"2020-01-01 10:00:00"} | ${179}
+  `("diffSecondsFromNow", ({ now, self, expected }) => {
+    test(`(${self}).diffSecondsFromNow()(now = ${now}) = ${expected}`, () => {
+      MockDate.set(now);
+      expect(DateTime.of(self).diffSecondsFromNow).toBe(expected);
     });
   });
 
