@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-undef
 module.exports = {
-  verbose: true,
+  verbose: false,
   maxWorkers: 1,
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.ts", "sample/**/*.ts"],

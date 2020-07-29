@@ -17,24 +17,6 @@ function toHHmmss(seconds: number): string {
   return `${pad00(hour)}:${pad00(min)}:${pad00(sec)}`;
 }
 
-/**
- * HH:mm:ss -> Japanese format
- * ex
- *   00:00:48 -> 48秒
- *   00:02:11 -> 2分 (Ignore seconds in the case seconds >= 60)
- * @param time
- */
-function toJapanese(time: string): string {
-  const [hours, minutes, seconds] = time.split(":").map(Number);
-  return [
-    hours && `${hours}時間`,
-    minutes && `${minutes}分`,
-    hours === 0 && minutes === 0 && `${seconds}秒`,
-  ]
-    .filter((x) => x)
-    .join("");
-}
-
 export class DateTime extends ValueObject<dayjs.Dayjs> {
   private _owleliaVoCommonDateTimeBrand!: never;
 
@@ -46,16 +28,28 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return new DateTime(dayjs());
   }
 
+  static today(): DateTime {
+    return new DateTime(dayjs().startOf("day"));
+  }
+
   static yesterday(): DateTime {
-    return DateTime.now().minusDays(1);
+    return DateTime.today().minusDays(1);
   }
 
   static tomorrow(): DateTime {
-    return DateTime.now().plusDays(1);
+    return DateTime.today().plusDays(1);
   }
 
   plusDays(days: number): DateTime {
     return new DateTime(this._value.add(days, "day"));
+  }
+
+  plusHours(hours: number): DateTime {
+    return new DateTime(this._value.add(hours, "hour"));
+  }
+
+  plusMinutes(minutes: number): DateTime {
+    return new DateTime(this._value.add(minutes, "minute"));
   }
 
   plusSeconds(seconds: number): DateTime {
@@ -66,28 +60,44 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return new DateTime(this._value.subtract(days, "day"));
   }
 
+  minusHours(hours: number): DateTime {
+    return new DateTime(this._value.subtract(hours, "hour"));
+  }
+
   minusMinutes(minutes: number): DateTime {
     return new DateTime(this._value.subtract(minutes, "minute"));
   }
 
-  get diffMinutesFromNow(): number {
+  minusSeconds(seconds: number): DateTime {
+    return new DateTime(this._value.subtract(seconds, "second"));
+  }
+
+  overwriteDate(date: DateTime): DateTime {
+    return new DateTime(
+      this._value
+        .year(date._value.year())
+        .month(date._value.month())
+        .date(date._value.date())
+    );
+  }
+
+  diffMinutesFromNow(): number {
     return DateTime.now()._value.diff(this._value, "minute");
   }
 
-  get diffSecondsFromNow(): number {
+  diffSecondsFromNow(): number {
     return DateTime.now()._value.diff(this._value, "second");
   }
 
+  /**
+   * HH:mm:ss (ex: 10:50:01)
+   */
   displayDiffFromNow(): string {
     return toHHmmss(DateTime.now()._value.diff(this._value, "second"));
   }
 
   within(seconds: number): boolean {
     return DateTime.now()._value.diff(this._value, "second") <= seconds;
-  }
-
-  equalsAsDate(dateTime: DateTime): boolean {
-    return this._value.isSame(dateTime._value, "day");
   }
 
   equals(date: DateTime, ignoreTime = false): boolean {
@@ -131,6 +141,10 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     );
   }
 
+  get isStartOfDay(): boolean {
+    return this._value.startOf("day").isSame(this._value);
+  }
+
   get unix(): number {
     return this._value.unix();
   }
@@ -139,12 +153,34 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return this._value.format("YYYY-MM-DDTHH:mm:ssZ");
   }
 
+  get rfc3339WithoutTimezone(): string {
+    return this._value.format("YYYY-MM-DDTHH:mm:ss");
+  }
+
   get displayTime(): string {
     return this._value.format("HH:mm:ss");
   }
 
   get displayTimeWithoutSeconds(): string {
     return this._value.format("HH:mm");
+  }
+
+  /**
+   * ex
+   *   2000-01-01 00:00:48 -> 48秒
+   *   2000-01-01 00:02:11 -> 2分 (Ignore seconds in the case seconds >= 60)
+   */
+  get japaneseDisplayTime(): string {
+    const hours = this._value.hour();
+    const minutes = this._value.minute();
+    const seconds = this._value.second();
+    return [
+      hours && `${hours}時間`,
+      minutes && `${minutes}分`,
+      hours === 0 && minutes === 0 && `${seconds}秒`,
+    ]
+      .filter((x) => x)
+      .join("");
   }
 
   get displayDate(): string {
@@ -162,4 +198,5 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   get displayDateTimeWithoutSeconds(): string {
     return this._value.format("YYYY-MM-DD HH:mm");
   }
+
 }
