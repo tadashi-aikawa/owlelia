@@ -3,11 +3,11 @@ import MockDate from "mockdate";
 
 describe("DateTime", () => {
   describe.each`
-    value                          | expected
-    ${"2020-02-02"}                | ${"2020-02-02T00:00:00"}
-    ${"2020-02-02 10:10:10"}       | ${"2020-02-02T10:10:10"}
-    ${"2020/02/02"}                | ${"2020-02-02T00:00:00"}
-    ${"2020/02/02 20:20:20"}       | ${"2020-02-02T20:20:20"}
+    value                    | expected
+    ${"2020-02-02"}          | ${"2020-02-02T00:00:00"}
+    ${"2020-02-02 10:10:10"} | ${"2020-02-02T10:10:10"}
+    ${"2020/02/02"}          | ${"2020-02-02T00:00:00"}
+    ${"2020/02/02 20:20:20"} | ${"2020-02-02T20:20:20"}
   `("DateTime.of", ({ value, expected }) => {
     test(`DateTime.of(${value}) = ${expected}`, () => {
       // TODO: Specify timezone...
@@ -447,9 +447,9 @@ describe("DateTime", () => {
     ${"2020-01-01 01:01:00"} | ${"1時間1分"}
     ${"2020-01-01 01:01:01"} | ${"1時間1分"}
     ${"2020-01-01 10:01:01"} | ${"10時間1分"}
-  `("japaneseDisplayTime", ({ self, expected }) => {
-    test(`(${self}).japaneseDisplayTime = ${expected}`, () => {
-      expect(DateTime.of(self).japaneseDisplayTime).toBe(expected);
+  `("displayDiffFromNowJapanese", ({ self, expected }) => {
+    test(`(${self}).displayDiffFromNowJapanese() = ${expected}`, () => {
+      expect(DateTime.of(self).displayDiffFromNowJapanese()).toBe(expected);
     });
   });
 });

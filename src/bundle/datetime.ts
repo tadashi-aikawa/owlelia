@@ -96,6 +96,24 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return toHHmmss(DateTime.now()._value.diff(this._value, "second"));
   }
 
+  /**
+   * ex
+   *   00:00:48 -> 48秒
+   *   00:02:11 -> 2分 (Ignore seconds in the case seconds >= 60)
+   */
+  displayDiffFromNowJapanese(): string {
+    const hours = this._value.hour();
+    const minutes = this._value.minute();
+    const seconds = this._value.second();
+    return [
+      hours && `${hours}時間`,
+      minutes && `${minutes}分`,
+      hours === 0 && minutes === 0 && `${seconds}秒`,
+    ]
+      .filter((x) => x)
+      .join("");
+  }
+
   within(seconds: number): boolean {
     return DateTime.now()._value.diff(this._value, "second") <= seconds;
   }
@@ -163,24 +181,6 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
 
   get displayTimeWithoutSeconds(): string {
     return this._value.format("HH:mm");
-  }
-
-  /**
-   * ex
-   *   2000-01-01 00:00:48 -> 48秒
-   *   2000-01-01 00:02:11 -> 2分 (Ignore seconds in the case seconds >= 60)
-   */
-  get japaneseDisplayTime(): string {
-    const hours = this._value.hour();
-    const minutes = this._value.minute();
-    const seconds = this._value.second();
-    return [
-      hours && `${hours}時間`,
-      minutes && `${minutes}分`,
-      hours === 0 && minutes === 0 && `${seconds}秒`,
-    ]
-      .filter((x) => x)
-      .join("");
   }
 
   get displayDate(): string {
