@@ -223,6 +223,11 @@ describe("DateTime", () => {
       );
     });
   });
+  test("equals with default parameters", () => {
+    const self = DateTime.of("2020-01-01 10:00:00");
+    const dateTime = DateTime.of("2020-01-01 11:11:11");
+    expect(self.equals(dateTime, false)).toBe(self.equals(dateTime));
+  });
 
   describe.each`
     self                     | dateTime                 | ignoreTime | expected
@@ -242,6 +247,11 @@ describe("DateTime", () => {
         expected
       );
     });
+  });
+  test("isAfter with default parameters", () => {
+    const self = DateTime.of("2020-01-01 10:00:00");
+    const dateTime = DateTime.of("2020-01-01 09:59:59");
+    expect(self.isAfter(dateTime, false)).toBe(self.isAfter(dateTime));
   });
 
   describe.each`
@@ -263,6 +273,11 @@ describe("DateTime", () => {
       ).toBe(expected);
     });
   });
+  test("isBefore with default parameters", () => {
+    const self = DateTime.of("2020-01-01 10:00:00");
+    const dateTime = DateTime.of("2020-01-01 10:00:01");
+    expect(self.isBefore(dateTime, false)).toBe(self.isBefore(dateTime));
+  });
 
   describe.each`
     self                     | dateTime                 | ignoreTime | expected
@@ -283,6 +298,13 @@ describe("DateTime", () => {
       ).toBe(expected);
     });
   });
+  test("isAfterOrEquals with default parameters", () => {
+    const self = DateTime.of("2020-01-01 10:00:00");
+    const dateTime = DateTime.of("2020-01-01 10:00:01");
+    expect(self.isAfterOrEquals(dateTime, false)).toBe(
+      self.isAfterOrEquals(dateTime)
+    );
+  });
 
   describe.each`
     self                     | dateTime                 | ignoreTime | expected
@@ -302,6 +324,13 @@ describe("DateTime", () => {
         DateTime.of(self).isBeforeOrEquals(DateTime.of(dateTime), ignoreTime)
       ).toBe(expected);
     });
+  });
+  test("isBeforeOrEquals with default parameters", () => {
+    const self = DateTime.of("2020-01-01 10:00:00");
+    const dateTime = DateTime.of("2020-01-01 09:59:59");
+    expect(self.isBeforeOrEquals(dateTime, false)).toBe(
+      self.isBeforeOrEquals(dateTime)
+    );
   });
 
   describe.each`
@@ -342,6 +371,18 @@ describe("DateTime", () => {
       });
     }
   );
+  test("between with default parameters", () => {
+    const self = DateTime.of("2020-01-01 00:01:00");
+    const begin = DateTime.of("2020-01-01 00:00:59");
+    const end = DateTime.of("2020-01-01 00:01:01");
+    expect(
+      self.between(begin, end, {
+        includeBegin: true,
+        includeEnd: true,
+        ignoreTime: false,
+      })
+    ).toBe(self.between(begin, end));
+  });
 
   describe.each`
     self                     | expected

@@ -72,6 +72,10 @@ describe("Simple VO(Animal)", () => {
     actual = Animal.of({ kind: "dog", name: "momochi" });
   });
 
+  test("unknown if kind is not specified", () => {
+    expect(Animal.of({ name: "hoge" }).kind).toBe("unknown");
+  });
+
   test("can created by of", () => {
     expect(actual.kind).toBe("dog");
   });
