@@ -163,40 +163,73 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return this._value.startOf("day").isSame(this._value);
   }
 
+  /**
+   * ex: 1970-01-01 00:01:30 -> 90
+   */
   get unix(): number {
     return this._value.unix();
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02T08:23:01+00:00
+   */
   get rfc3339(): string {
     return this._value.format("YYYY-MM-DDTHH:mm:ssZ");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02T08:23:01
+   */
   get rfc3339WithoutTimezone(): string {
     return this._value.format("YYYY-MM-DDTHH:mm:ss");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 08:23:01
+   */
   get displayTime(): string {
     return this._value.format("HH:mm:ss");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 08:23
+   */
   get displayTimeWithoutSeconds(): string {
     return this._value.format("HH:mm");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02
+   */
   get displayDate(): string {
     return this._value.format("YYYY-MM-DD");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02 (Fri)
+   */
   get displayDateFull(): string {
     return this._value.format("YYYY-MM-DD (ddd)");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02 08:23:01
+   */
   get displayDateTime(): string {
     return this._value.format("YYYY-MM-DD HH:mm:ss");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 2020-10-02 08:23
+   */
   get displayDateTimeWithoutSeconds(): string {
     return this._value.format("YYYY-MM-DD HH:mm");
   }
 
+  /**
+   * ex: 2020-10-02 08:23:01 -> 20201002082301
+   */
+  get yyyyMMddHHmmss(): string {
+    return this._value.format("YYYYMMDDHHmmss");
+  }
 }
