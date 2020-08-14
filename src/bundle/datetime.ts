@@ -40,6 +40,10 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return DateTime.today().plusDays(1);
   }
 
+  static isValid(value: string, format: string): boolean {
+    return dayjs(value,  format).format(format) === value;
+  }
+
   plusDays(days: number): DateTime {
     return new DateTime(this._value.add(days, "day"));
   }

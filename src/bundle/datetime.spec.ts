@@ -62,6 +62,18 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    value           | format          | expected
+    ${"2020-01-01"} | ${"YYYY-MM-DD"} | ${true}
+    ${"2020-01-31"} | ${"YYYY-MM-DD"} | ${true}
+    ${"2020-01-32"} | ${"YYYY-MM-DD"} | ${false}
+    ${"2020-01-01"} | ${"YYYY/MM/DD"} | ${false}
+  `("DateTime.isValid", ({ value, format, expected }) => {
+    test(`DateTime.isValid(${value}, ${format}) = ${expected}`, () => {
+      expect(DateTime.isValid(value, format)).toBe(expected);
+    });
+  });
+
+  describe.each`
     self                     | days | expected
     ${"2020-01-01 10:00:00"} | ${3} | ${"2020-01-04T10:00:00"}
   `("plusDays", ({ self, days, expected }) => {
