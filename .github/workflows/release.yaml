@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
+          registry-url: 'https://registry.npmjs.org'
 
       - run: npm install
       - run: |
@@ -22,6 +23,8 @@ jobs:
           git config user.name "GitHub Actions"
       - name: Release
         run: make release version=${{ github.event.inputs.version }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: "Slack notification (not success)"
         uses: homoluctus/slatify@master
