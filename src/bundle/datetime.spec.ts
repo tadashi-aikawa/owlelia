@@ -1,6 +1,8 @@
 import { DateTime } from "./datetime";
 import MockDate from "mockdate";
 
+DateTime.setHolidays("2020-07-07", "2020-12-02", "2020-12-24");
+
 describe("DateTime", () => {
   describe.each`
     value                    | expected
@@ -363,6 +365,54 @@ describe("DateTime", () => {
   `("isStartOfDay", ({ self, expected }) => {
     test(`(${self}).isStartOfDay = ${expected}`, () => {
       expect(DateTime.of(self).isStartOfDay).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-04 00:00:00"} | ${false}
+    ${"2020-12-05 10:00:00"} | ${true}
+    ${"2020-12-06 23:59:59"} | ${false}
+  `("isSaturday", ({ self, expected }) => {
+    test(`(${self}).isSaturday = ${expected}`, () => {
+      expect(DateTime.of(self).isSaturday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-04 00:00:00"} | ${false}
+    ${"2020-12-05 10:00:00"} | ${false}
+    ${"2020-12-06 23:59:59"} | ${true}
+  `("isSunday", ({ self, expected }) => {
+    test(`(${self}).isSunday = ${expected}`, () => {
+      expect(DateTime.of(self).isSunday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-01-01 00:00:00"} | ${false}
+    ${"2020-07-07 10:00:00"} | ${true}
+    ${"2020-12-24 23:59:59"} | ${true}
+  `("isHoliday", ({ self, expected }) => {
+    test(`(${self}).isHoliday = ${expected}`, () => {
+      expect(DateTime.of(self).isHoliday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-01 00:00:00"} | ${true}
+    ${"2020-12-02 03:00:00"} | ${false}
+    ${"2020-12-03 06:00:00"} | ${true}
+    ${"2020-12-04 09:00:00"} | ${true}
+    ${"2020-12-05 12:00:00"} | ${false}
+    ${"2020-12-06 15:00:00"} | ${false}
+    ${"2020-12-07 18:00:00"} | ${true}
+  `("isWeekDay", ({ self, expected }) => {
+    test(`(${self}).isWeekDay = ${expected}`, () => {
+      expect(DateTime.of(self).isWeekDay).toBe(expected);
     });
   });
 
