@@ -1,38 +1,27 @@
-name: "Tests"
+name: "Release"
 
 on:
-  push:
-    paths:
-      - ".github/**/*"
-      - "src/*"
-      - "src/**/*"
-      - "*.js"
-      - "*.json"
-  schedule:
-    - cron: "0 0 * * *"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version (ex: 2.3.1)"
+        required: true
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: ["12.x", "14.x"]
-    name: Node ${{ matrix.node }}
-
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 14.x
 
       - run: npm install
-      - run: npm run build
-
-      - run: npm test
-      - uses: codecov/codecov-action@v1
-        if: "matrix.node == '12.x' && success()"
-        with:
-          file: ./coverage/clover.xml
+      - run: |
+          git config user.email "github-actions@users.noreply.github.com"
+          git config user.name "GitHub Actions"
+      - name: Release
+        run: make release version=${{ github.event.inputs.version }}
 
       - name: "Slack notification (not success)"
         uses: homoluctus/slatify@master
@@ -40,14 +29,14 @@ jobs:
         with:
           type: ${{ job.status }}
           username: GitHub Actions (Failure)
-          job_name: ":owlelia::nodejs:*${{ matrix.node }}* Tests"
+          job_name: ":owlelia: Release v${{ github.event.inputs.version }}"
           mention: channel
           mention_if: always
           icon_emoji: "github"
           url: ${{ secrets.SLACK_WEBHOOK }}
 
   notify:
-    needs: test
+    needs: release
     runs-on: ubuntu-latest
 
     steps:
@@ -57,6 +46,6 @@ jobs:
         with:
           type: ${{ job.status }}
           username: GitHub Actions (Success)
-          job_name: ":owlelia::nodejs: All tests"
+          job_name: ":owlelia: Release v${{ github.event.inputs.version }}"
           icon_emoji: ":github:"
           url: ${{ secrets.SLACK_WEBHOOK }}
