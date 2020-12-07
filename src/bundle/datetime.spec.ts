@@ -87,6 +87,18 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | days | expected
+    ${"2020-12-01 00:00:00"} | ${2} | ${"2020-12-04T00:00:00"}
+    ${"2020-12-03 00:00:00"} | ${3} | ${"2020-12-08T00:00:00"}
+  `("plusWeekdays", ({ self, days, expected }) => {
+    test(`(${self}).plusWeekdays(${days}) = ${expected}`, () => {
+      expect(DateTime.of(self).plusWeekdays(days).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | hours | expected
     ${"2020-01-01 10:00:00"} | ${3}  | ${"2020-01-01T13:00:00"}
   `("plusHours", ({ self, hours, expected }) => {
@@ -410,9 +422,9 @@ describe("DateTime", () => {
     ${"2020-12-05 12:00:00"} | ${false}
     ${"2020-12-06 15:00:00"} | ${false}
     ${"2020-12-07 18:00:00"} | ${true}
-  `("isWeekDay", ({ self, expected }) => {
-    test(`(${self}).isWeekDay = ${expected}`, () => {
-      expect(DateTime.of(self).isWeekDay).toBe(expected);
+  `("isWeekday", ({ self, expected }) => {
+    test(`(${self}).isWeekday = ${expected}`, () => {
+      expect(DateTime.of(self).isWeekday).toBe(expected);
     });
   });
 

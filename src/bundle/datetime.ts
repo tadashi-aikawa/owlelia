@@ -30,6 +30,17 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
 
   private static holidays: DateTime[];
   private static holidayByDisplayDate: { [date: string]: DateTime };
+
+  /**
+   * Set specific holidays.
+   * It is used by {@link DateTime.isHoliday}, {@link DateTime.isWeekday} and so on.
+   * @param dates  String date formats which can supported by {@link DateTime.of}
+   *
+   * @example Set 2020-01-01, 2020-01-02 and 2020-01-03 as a holiday.
+   * ```typescript
+   * DateTime.setHolidays("2020-01-01", "2020-01-02", "2020-01-03")
+   * ```
+   */
   static setHolidays(...dates: string[]): void {
     this.holidays = dates.map(DateTime.of);
     this.holidayByDisplayDate = keyBy(this.holidays, (x) => x.displayDate);
@@ -124,6 +135,13 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * Clone a instance
+   */
+  clone(): DateTime {
+    return new DateTime(this._value.clone());
+  }
+
+  /**
    * @param days
    *
    * @example
@@ -134,6 +152,30 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   plusDays(days: number): DateTime {
     return new DateTime(this._value.add(days, "day"));
+  }
+
+  /**
+   * @param weekdays
+   *
+   * @example 2020-12-01(Tue) - 2020-12-07(Mon). 2020-12-02 is a holiday!
+   * ```typescript
+   * DateTime.setHolidays("2020-12-02");
+   *
+   * DateTime.of("2020-12-01 00:00:00").plusWeekdays(2)
+   *   // -> 2020-12-04T00:00:00
+   * DateTime.of("2020-12-03 00:00:00").plusWeekdays(3)
+   *   // -> 2020-12-08T00:00:00
+   * ```
+   */
+  plusWeekdays(weekdays: number): DateTime {
+    let d = this.clone();
+    while (weekdays > 0) {
+      d = d.plusDays(1);
+      if (d.isWeekday) {
+        weekdays--;
+      }
+    }
+    return d;
   }
 
   /**
@@ -399,7 +441,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *   // -> true
    * ```
    */
-  get isWeekDay(): boolean {
+  get isWeekday(): boolean {
     return !(this.isSaturday || this.isSunday || this.isHoliday);
   }
 
