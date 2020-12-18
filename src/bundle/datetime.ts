@@ -369,6 +369,48 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     );
   }
 
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-02-01 10:00:00").year
+   *   // -> 2020
+   * ```
+   */
+  get year(): number {
+    return this._value.year();
+  }
+
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-02-01 10:00:00").month
+   *   // -> 2
+   * ```
+   */
+  get month(): number {
+    return this._value.month() + 1;
+  }
+
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-02-01 10:00:00").day
+   *   // -> 1
+   * ```
+   */
+  get day(): number {
+    return this._value.date();
+  }
+
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-05 00:00:00").isStartOfDay
+   *   // -> true
+   * DateTime.of("2020-01-05 00:00:01").isStartOfDay
+   *   // -> false
+   * ```
+   */
   get isStartOfDay(): boolean {
     return this._value.startOf("day").isSame(this._value);
   }

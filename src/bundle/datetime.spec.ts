@@ -372,6 +372,36 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-01-01 00:00:00"} | ${2020}
+    ${"2021-12-31 00:00:01"} | ${2021}
+  `("year", ({ self, expected }) => {
+    test(`(${self}).year = ${expected}`, () => {
+      expect(DateTime.of(self).year).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-01-01 00:00:00"} | ${1}
+    ${"2021-12-31 00:00:01"} | ${12}
+  `("month", ({ self, expected }) => {
+    test(`(${self}).month = ${expected}`, () => {
+      expect(DateTime.of(self).month).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-01-01 00:00:00"} | ${1}
+    ${"2021-12-31 00:00:01"} | ${31}
+  `("day", ({ self, expected }) => {
+    test(`(${self}).day = ${expected}`, () => {
+      expect(DateTime.of(self).day).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-05 00:00:00"} | ${true}
     ${"2020-01-05 00:00:01"} | ${false}
     ${"2020-01-04 23:59:59"} | ${false}
