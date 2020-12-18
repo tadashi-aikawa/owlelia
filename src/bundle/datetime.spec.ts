@@ -77,6 +77,17 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | months | expected
+    ${"2020-01-01 10:00:00"} | ${2}   | ${"2020-03-01T10:00:00"}
+  `("plusMonths", ({ self, months, expected }) => {
+    test(`(${self}).plusMonths(${months}) = ${expected}`, () => {
+      expect(DateTime.of(self).plusMonths(months).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | days | expected
     ${"2020-01-01 10:00:00"} | ${3} | ${"2020-01-04T10:00:00"}
   `("plusDays", ({ self, days, expected }) => {

@@ -144,6 +144,19 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @param months
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").plusMonths(2)
+   *   // -> 2020-03-01T10:00:00
+   * ```
+   */
+  plusMonths(months: number): DateTime {
+    return new DateTime(this._value.add(months, "month"));
+  }
+
+  /**
    * @param days
    *
    * @example
