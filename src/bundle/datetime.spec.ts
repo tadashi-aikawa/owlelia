@@ -429,6 +429,15 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | expected
+    ${"2020-01-01 00:01:30"} | ${new Date(2020, 0, 1, 0, 1, 30, 0).getTime()}
+  `("date", ({ self, expected }) => {
+    test(`(${self}).date = ${expected}`, () => {
+      expect(DateTime.of(self).date.getTime()).toBe(expected);
+    });
+  });
+
+  describe.each`
     self                           | expected
     ${"1970-01-01 00:01:30+00:00"} | ${90}
   `("unix", ({ self, expected }) => {

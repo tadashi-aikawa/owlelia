@@ -446,6 +446,17 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 00:01:30").date
+   *   // -> equals to new Date(2020, 0, 1, 0, 1, 30, 0)
+   * ```
+   */
+  get date(): Date {
+    return this._value.toDate();
+  }
+
+  /**
    * ex: 1970-01-01 00:01:30 -> 90
    */
   get unix(): number {
