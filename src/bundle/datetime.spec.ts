@@ -413,6 +413,16 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-01-01 00:00:00"} | ${202001}
+    ${"2021-12-31 00:00:01"} | ${202112}
+  `("yearMonth", ({ self, expected }) => {
+    test(`(${self}).yearMonth = ${expected}`, () => {
+      expect(DateTime.of(self).yearMonth).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-05 00:00:00"} | ${true}
     ${"2020-01-05 00:00:01"} | ${false}
     ${"2020-01-04 23:59:59"} | ${false}

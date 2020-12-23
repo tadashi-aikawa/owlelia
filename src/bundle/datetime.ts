@@ -418,6 +418,17 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   /**
    * @example
    * ```typescript
+   * DateTime.of("2020-02-01 10:00:00").yearMonth
+   *   // -> 202002
+   * ```
+   */
+  get yearMonth(): number {
+    return this.year * 100 + this.month;
+  }
+
+  /**
+   * @example
+   * ```typescript
    * DateTime.of("2020-01-05 00:00:00").isStartOfDay
    *   // -> true
    * DateTime.of("2020-01-05 00:00:01").isStartOfDay
