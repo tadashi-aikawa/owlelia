@@ -5,3 +5,4 @@ import { DateTime } from "./bundle/datetime";
 
 export { ValueObject, PrimitiveValueObject, Entity, BaseError, DateTime };
 export * from "./either";
+export * from "./bundle/utils";
