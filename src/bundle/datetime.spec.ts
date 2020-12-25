@@ -77,6 +77,42 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | year    | expected
+    ${"2020-01-01 10:00:00"} | ${2000} | ${"2000-01-01T10:00:00"}
+    ${"2020-01-02 10:00:00"} | ${2010} | ${"2010-01-02T10:00:00"}
+  `("replaceYear", ({ self, year, expected }) => {
+    test(`(${self}).replaceYear(${year}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceYear(year).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
+    self                     | month | expected
+    ${"2020-01-01 10:00:00"} | ${11} | ${"2020-11-01T10:00:00"}
+    ${"2020-01-02 10:00:00"} | ${3}  | ${"2020-03-02T10:00:00"}
+  `("replaceMonth", ({ self, month, expected }) => {
+    test(`(${self}).replaceMonth(${month}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceMonth(month).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
+    self                     | day   | expected
+    ${"2020-01-01 10:00:00"} | ${20} | ${"2020-01-20T10:00:00"}
+    ${"2020-01-02 10:00:00"} | ${9}  | ${"2020-01-09T10:00:00"}
+  `("replaceDay", ({ self, day, expected }) => {
+    test(`(${self}).replaceDay(${day}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceDay(day).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | months | expected
     ${"2020-01-01 10:00:00"} | ${2}   | ${"2020-03-01T10:00:00"}
   `("plusMonths", ({ self, months, expected }) => {
@@ -88,8 +124,8 @@ describe("DateTime", () => {
   });
 
   describe.each`
-    self                     | days | expected
-    ${"2020-01-01 10:00:00"} | ${3} | ${"2020-01-04T10:00:00"}
+    self                     | days  | expected
+    ${"2020-01-01 10:00:00"} | ${20} | ${"2020-01-21T10:00:00"}
   `("plusDays", ({ self, days, expected }) => {
     test(`(${self}).plusDays(${days}) = ${expected}`, () => {
       expect(DateTime.of(self).plusDays(days).rfc3339).toMatch(
@@ -144,8 +180,8 @@ describe("DateTime", () => {
   });
 
   describe.each`
-    self                     | days | expected
-    ${"2020-01-01 10:00:00"} | ${3} | ${"2019-12-29T10:00:00"}
+    self                     | days  | expected
+    ${"2020-01-01 10:00:00"} | ${13} | ${"2019-12-19T10:00:00"}
   `("minusDays", ({ self, days, expected }) => {
     test(`(${self}).minusDays(${days}) = ${expected}`, () => {
       expect(DateTime.of(self).minusDays(days).rfc3339).toMatch(
