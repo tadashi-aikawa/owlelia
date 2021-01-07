@@ -246,6 +246,16 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    date                     | self                     | expected
+    ${"2019-11-01 10:00:00"} | ${"2020-01-01 10:00:00"} | ${2}
+    ${"2020-01-01 00:00:00"} | ${"2019-12-31 23:59:59"} | ${-1}
+  `("diffMonths", ({ date, self, expected }) => {
+    test(`(${self}).diffMonths(${date}) = ${expected}`, () => {
+      expect(DateTime.of(self).diffMonths(DateTime.of(date))).toBe(expected);
+    });
+  });
+
+  describe.each`
     now                      | self                     | expected
     ${"2020-01-01 10:03:00"} | ${"2020-01-01 10:00:00"} | ${3}
     ${"2020-01-01 10:03:01"} | ${"2020-01-01 10:00:00"} | ${3}
