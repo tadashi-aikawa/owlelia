@@ -272,6 +272,19 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @param months
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").minusMonths(2)
+   *   // -> 2019-11-01T10:00:00
+   * ```
+   */
+  minusMonth(months: number): DateTime {
+    return new DateTime(this._value.subtract(months, "month"));
+  }
+
+  /**
    * @param days
    *
    * @example

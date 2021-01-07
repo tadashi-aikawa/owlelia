@@ -180,6 +180,17 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | months | expected
+    ${"2020-01-01 10:00:00"} | ${2}   | ${"2019-11-01T10:00:00"}
+  `("minusMonth", ({ self, months, expected }) => {
+    test(`(${self}).minusMonth(${months}) = ${expected}`, () => {
+      expect(DateTime.of(self).minusMonth(months).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | days  | expected
     ${"2020-01-01 10:00:00"} | ${13} | ${"2019-12-19T10:00:00"}
   `("minusDays", ({ self, days, expected }) => {
