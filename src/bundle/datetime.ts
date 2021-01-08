@@ -378,9 +378,9 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *
    * @example
    * ```typescript
-   * DateTime.of("2021-01-01 10:00:00").diffMonths(DateTime.of("2020-12-30 22:00:00"))
+   * DateTime.of("2021-01-01 10:00:00").diffDays(DateTime.of("2020-12-30 22:00:00"))
    *   // -> 2
-   * DateTime.of("2019-12-31 23:59:59").diffMonths(DateTime.of("2020-01-01 00:00:00"))
+   * DateTime.of("2019-12-31 23:59:59").diffDays(DateTime.of("2020-01-01 00:00:00"))
    *   // -> -1
    * ```
    */
