@@ -368,7 +368,24 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   diffMonths(date: DateTime): number {
-    return this.year * 12 + this.month - (date.year * 12 + date.month);
+    return this._value
+      .startOf("month")
+      .diff(date._value.startOf("month"), "month");
+  }
+
+  /**
+   * @param date
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2021-01-01 10:00:00").diffMonths(DateTime.of("2020-12-30 22:00:00"))
+   *   // -> 2
+   * DateTime.of("2019-12-31 23:59:59").diffMonths(DateTime.of("2020-01-01 00:00:00"))
+   *   // -> -1
+   * ```
+   */
+  diffDays(date: DateTime): number {
+    return this._value.startOf("day").diff(date._value.startOf("day"), "day");
   }
 
   diffMinutesFromNow(): number {
