@@ -513,6 +513,39 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   /**
    * @example
    * ```typescript
+   * DateTime.of("2020-02-01 12:34:56").hour
+   *   // -> 12
+   * ```
+   */
+  get hour(): number {
+    return this._value.hour();
+  }
+
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-02-01 12:34:56").minute
+   *   // -> 34
+   * ```
+   */
+  get minute(): number {
+    return this._value.minute();
+  }
+
+  /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-02-01 12:34:56").second
+   *   // -> 56
+   * ```
+   */
+  get second(): number {
+    return this._value.second();
+  }
+
+  /**
+   * @example
+   * ```typescript
    * DateTime.of("2020-01-05 00:00:00").isStartOfDay
    *   // -> true
    * DateTime.of("2020-01-05 00:00:01").isStartOfDay

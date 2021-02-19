@@ -491,6 +491,33 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-01-01 12:34:56"} | ${12}
+  `("hour", ({ self, expected }) => {
+    test(`(${self}).hour = ${expected}`, () => {
+      expect(DateTime.of(self).hour).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-01-01 12:34:56"} | ${34}
+  `("minute", ({ self, expected }) => {
+    test(`(${self}).minute = ${expected}`, () => {
+      expect(DateTime.of(self).minute).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-01-01 12:34:56"} | ${56}
+  `("second", ({ self, expected }) => {
+    test(`(${self}).second = ${expected}`, () => {
+      expect(DateTime.of(self).second).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-05 00:00:00"} | ${true}
     ${"2020-01-05 00:00:01"} | ${false}
     ${"2020-01-04 23:59:59"} | ${false}
