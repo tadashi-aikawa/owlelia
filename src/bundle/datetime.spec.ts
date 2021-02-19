@@ -450,6 +450,16 @@ describe("DateTime", () => {
   );
 
   describe.each`
+    self                     | template                 | expected
+    ${"2020-01-02 03:45:06"} | ${"YYYY年M月D日"}        | ${"2020年1月2日"}
+    ${"2020-11-02 23:45:06"} | ${"YYYY-MM-DD HH:mm:ss"} | ${"2020-11-02 23:45:06"}
+  `("format", ({ self, template, expected }) => {
+    test(`(${self}).format(${template}) = ${expected}`, () => {
+      expect(DateTime.of(self).format(template)).toBe(expected);
+    });
+  });
+
+  describe.each`
     self                     | expected
     ${"2020-01-01 00:00:00"} | ${2020}
     ${"2021-12-31 00:00:01"} | ${2021}

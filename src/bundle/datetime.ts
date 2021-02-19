@@ -469,6 +469,17 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   /**
    * @example
    * ```typescript
+   * DateTime.of("2020-02-01 10:12:00").format("YYYY年M月D日")
+   *   // -> 2020年2月1日
+   * ```
+   */
+  format(template: string): string {
+    return this._value.format(template);
+  }
+
+  /**
+   * @example
+   * ```typescript
    * DateTime.of("2020-02-01 10:00:00").year
    *   // -> 2020
    * ```
