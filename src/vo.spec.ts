@@ -43,8 +43,8 @@ describe("Primitive VO(SpotId)", () => {
 
   test("has invalid spotId", () => {
     const actual = SpotId.try("1234567");
-    if (!actual.isLeft()) {
-      fail("actual must be Left!");
+    if (!actual.isErr()) {
+      fail("actual must be Err!");
     }
 
     expect(actual.error.length).toBe(1);
@@ -53,8 +53,8 @@ describe("Primitive VO(SpotId)", () => {
 
   test("has invalid spotIds", () => {
     const actual = SpotId.listTry(["123", "12345", "1234567"]);
-    if (!actual.isLeft()) {
-      fail("actual must be Left!");
+    if (!actual.isErr()) {
+      fail("actual must be Err!");
     }
 
     expect(actual.error.length).toBe(2);

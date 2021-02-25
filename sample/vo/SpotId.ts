@@ -1,6 +1,6 @@
 import { PrimitiveValueObject } from "../../src";
 import { SampleError } from "../error/SampleError";
-import { aggregate, Either, right, left } from "../../src/either";
+import { aggregate, Result, ok, err } from "../../src/result";
 
 export class InvalidSpotIdError extends SampleError {
   code = "INVALID_SPOT_ID";
@@ -16,17 +16,17 @@ export class InvalidSpotIdError extends SampleError {
 export class SpotId extends PrimitiveValueObject<string> {
   _voSpotIdBrand!: never;
 
-  static try(value: string): Either<SampleError[], SpotId> {
+  static try(value: string): Result<SpotId, SampleError[]> {
     return value.length <= 4
-      ? right(new SpotId(value))
-      : left([InvalidSpotIdError.of({ invalidId: value })]);
+      ? ok(new SpotId(value))
+      : err([InvalidSpotIdError.of({ invalidId: value })]);
   }
 
   static of(value: string): SpotId {
     return SpotId.try(value).orThrow();
   }
 
-  static listTry(values: string[]): Either<SampleError[], SpotId[]> {
+  static listTry(values: string[]): Result<SpotId[], SampleError[]> {
     return aggregate(values.map(SpotId.try));
   }
 
