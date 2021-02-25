@@ -1,3 +1,6 @@
-export abstract class BaseError extends Error {
-  abstract code: string;
+export class BaseError extends Error {
+  constructor(message?: string) {
+    super(message);
+    this.name = new.target.name;
+  }
 }

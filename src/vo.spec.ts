@@ -49,7 +49,7 @@ describe("Primitive VO(SpotId)", () => {
     }
 
     expect(actual.error.length).toBe(1);
-    expect(actual.error[0].code).toBe("INVALID_SPOT_ID");
+    expect(actual.error[0].name).toBe("InvalidSpotIdError");
   });
 
   test("has invalid spotIds", () => {

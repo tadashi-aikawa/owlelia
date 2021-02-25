@@ -1,3 +1,6 @@
 import { BaseError } from "../../src";
 
-export abstract class SampleError extends BaseError {}
+export class SampleError extends BaseError {}
+
+export class InvalidSpotIdError extends SampleError {}
+export class UnexpectedError extends SampleError {}
