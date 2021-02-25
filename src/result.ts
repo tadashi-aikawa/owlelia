@@ -88,6 +88,9 @@ class Err<T, E> {
 }
 
 export type Result<T, E> = Ok<T, E> | Err<T, E>;
+export type AsyncResult<T, E> = Promise<AsyncResult<T, E>>;
+export type Nullable<T> = T | undefined | null;
+export type AsyncNullable<T> = Promise<Nullable<T>>;
 
 export const err = <T, E>(error: E): Err<T, E> => new Err(error);
 export const ok = <T, E>(value: T): Ok<T, E> => new Ok(value);
