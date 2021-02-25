@@ -13,8 +13,9 @@ export class InvalidSpotIdError extends SampleError {
   }
 }
 
+const _brand = Symbol();
 export class SpotId extends PrimitiveValueObject<string> {
-  _voSpotIdBrand!: never;
+  private [_brand]: void;
 
   static try(value: string): Result<SpotId, SampleError[]> {
     return value.length <= 4

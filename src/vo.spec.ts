@@ -2,6 +2,7 @@ import { SpotId } from "../sample/vo/SpotId";
 import { Animal } from "../sample/vo/Animal";
 import { CoordinatePair } from "../sample/vo/CoordinatePair";
 import { Coordinate } from "../sample/vo/Coordinate";
+import { AnimalName } from "../sample/vo/AnimalName";
 
 describe("Primitive VO(SpotId)", () => {
   let actual: SpotId;
@@ -69,7 +70,7 @@ describe("Simple VO(Animal)", () => {
   let actual: Animal;
 
   beforeAll(() => {
-    actual = Animal.of({ kind: "dog", name: "momochi" });
+    actual = Animal.of({ kind: "dog", name: "momochi" as AnimalName });
   });
 
   test("can created by of", () => {
@@ -83,25 +84,25 @@ describe("Simple VO(Animal)", () => {
 
   test("equals the other", () => {
     expect(
-      actual.equals(Animal.of({ kind: "dog", name: "momochi" }))
+      actual.equals(Animal.of({ kind: "dog", name: "momochi" as AnimalName }))
     ).toBeTruthy();
     expect(
-      Animal.of({ kind: "dog", name: "momochi" }).equals(actual)
+      Animal.of({ kind: "dog", name: "momochi" as AnimalName }).equals(actual)
     ).toBeTruthy();
   });
 
   test("not equals others", () => {
     expect(
-      actual == Animal.of({ kind: "dog", name: "momochi" })
+      actual == Animal.of({ kind: "dog", name: "momochi" as AnimalName })
     ).not.toBeTruthy();
     expect(
-      actual === Animal.of({ kind: "dog", name: "momochi" })
+      actual === Animal.of({ kind: "dog", name: "momochi" as AnimalName })
     ).not.toBeTruthy();
     expect(
-      actual.equals(Animal.of({ kind: "cat", name: "momochi" }))
+      actual.equals(Animal.of({ kind: "cat", name: "momochi" as AnimalName }))
     ).not.toBeTruthy();
     expect(
-      actual.equals(Animal.of({ kind: "dog", name: "tatsuwo" }))
+      actual.equals(Animal.of({ kind: "dog", name: "tatsuwo" as AnimalName }))
     ).not.toBeTruthy();
   });
 

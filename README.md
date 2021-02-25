@@ -24,10 +24,6 @@ Sample
 
 There are some sample codes which use _owlelia_ in `./sample`.
 
-You need to install other packages as following.
-
-- [type-fest](https://github.com/sindresorhus/type-fest)
-
 
 For developers
 --------------

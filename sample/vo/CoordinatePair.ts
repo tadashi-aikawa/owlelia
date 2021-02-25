@@ -6,16 +6,12 @@ interface Props {
   other: Coordinate;
 }
 
-type Args = Props;
-
+const _brand = Symbol();
 export class CoordinatePair extends ValueObject<Props> {
-  _voCoordinatePairBrand!: never;
+  private [_brand]: void;
 
-  static of(args: Args): CoordinatePair {
-    return new CoordinatePair({
-      one: args.one,
-      other: args.other,
-    });
+  static of(props: Props): CoordinatePair {
+    return new CoordinatePair(props);
   }
 
   get displayString(): string {

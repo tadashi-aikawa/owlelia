@@ -1,18 +1,17 @@
-import { Merge } from "type-fest";
 import { ValueObject } from "../../src";
+import { AnimalName } from "./AnimalName";
 
 interface Props {
   kind: string;
-  name: string;
+  name: AnimalName;
 }
 
-type Args = Merge<Props, { kind?: string }>;
-
+const _brand = Symbol();
 export class Animal extends ValueObject<Props> {
-  _voAnimalBrand!: never;
+  private [_brand]: void;
 
-  static of(args: Args): Animal {
-    return new Animal({ kind: args.kind ?? "unknown", name: args.name });
+  static of(props: Props): Animal {
+    return new Animal(props);
   }
 
   get kind(): string {

@@ -9,21 +9,15 @@ interface Props {
   pastLocations?: Coordinate[];
 }
 
-type Args = Props;
-
+const _brand = Symbol();
 export class Spot extends Entity<Props> {
-  _entitySpotBrand!: never;
+  private [_brand]: void;
 
-  static of(args: Args): Spot {
-    return new Spot(args.id.unwrap(), {
-      id: args.id,
-      name: args.name,
-      location: args.location,
-      pastLocations: args.pastLocations,
-    });
+  static of(props: Props): Spot {
+    return new Spot(props.id.unwrap(), props);
   }
 
-  static listOf(argsList: Args[]): Spot[] {
+  static listOf(argsList: Props[]): Spot[] {
     return argsList.map(Spot.of);
   }
 

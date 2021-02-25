@@ -5,17 +5,16 @@ interface Props {
   lon: number;
 }
 
-type Args = Props;
-
+const _brand = Symbol();
 export class Coordinate extends ValueObject<Props> {
-  _voCoordinateBrand!: never;
+  private [_brand]: void;
 
-  static of(args: Args): Coordinate {
-    return new Coordinate({ lat: args.lat, lon: args.lon });
+  static of(props: Props): Coordinate {
+    return new Coordinate(props);
   }
 
-  static listOf(argsList: Args[]): Coordinate[] {
-    return argsList.map(Coordinate.of);
+  static listOf(propsList: Props[]): Coordinate[] {
+    return propsList.map(Coordinate.of);
   }
 
   get displayString(): string {
