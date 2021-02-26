@@ -2,5 +2,12 @@ import { BaseError } from "../../src";
 
 export class SampleError extends BaseError {}
 
-export class InvalidSpotIdError extends SampleError {}
-export class UnexpectedError extends SampleError {}
+const _invalidSpotIdBrand = Symbol();
+export class InvalidSpotIdError extends SampleError {
+  private [_invalidSpotIdBrand]: void;
+}
+
+const _unexpectedBrand = Symbol();
+export class UnexpectedError extends SampleError {
+  private [_unexpectedBrand]: void;
+}

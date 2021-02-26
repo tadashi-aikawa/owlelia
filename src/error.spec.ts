@@ -23,3 +23,14 @@ describe("UnexpectedError", () => {
     expect(sampleError.stack).toBeUndefined;
   });
 });
+
+describe("BaseError.to", () => {
+  test("can create a new Error instance from another", () => {
+    const unexpected = new UnexpectedError("オリジナルのエラーメッセージ");
+    const invalid = unexpected.to(InvalidSpotIdError);
+
+    expect(invalid.name).toBe("InvalidSpotIdError");
+    expect(invalid.message).toBe("オリジナルのエラーメッセージ");
+    expect(invalid.stack).toBeUndefined;
+  });
+});
