@@ -113,6 +113,42 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | hour  | expected
+    ${"2020-01-01 10:01:02"} | ${20} | ${"2020-01-01T20:01:02"}
+    ${"2020-01-02 11:03:04"} | ${9}  | ${"2020-01-02T09:03:04"}
+  `("replaceHour", ({ self, hour, expected }) => {
+    test(`(${self}).replaceHour(${hour}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceHour(hour).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
+    self                     | minute | expected
+    ${"2020-01-01 10:01:02"} | ${20}  | ${"2020-01-01T10:20:02"}
+    ${"2020-01-02 11:03:04"} | ${9}   | ${"2020-01-02T11:09:04"}
+  `("replaceMinute", ({ self, minute, expected }) => {
+    test(`(${self}).replaceMinute(${minute}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceMinute(minute).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
+    self                     | second | expected
+    ${"2020-01-01 10:01:02"} | ${20}  | ${"2020-01-01T10:01:20"}
+    ${"2020-01-02 11:03:04"} | ${9}   | ${"2020-01-02T11:03:09"}
+  `("replaceSecond", ({ self, second, expected }) => {
+    test(`(${self}).replaceSecond(${second}) = ${expected}`, () => {
+      expect(DateTime.of(self).replaceSecond(second).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | months | expected
     ${"2020-01-01 10:00:00"} | ${2}   | ${"2020-03-01T10:00:00"}
   `("plusMonths", ({ self, months, expected }) => {

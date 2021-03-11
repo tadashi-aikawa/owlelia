@@ -183,6 +183,45 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @param hour
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").replaceHour(3)
+   *   // -> 2020-01-01T03:00:00
+   * ```
+   */
+  replaceHour(hour: number): DateTime {
+    return new DateTime(this._value.hour(hour));
+  }
+
+  /**
+   * @param minute
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").replaceMinute(3)
+   *   // -> 2020-01-01T10:03:00
+   * ```
+   */
+  replaceMinute(minute: number): DateTime {
+    return new DateTime(this._value.minute(minute));
+  }
+
+  /**
+   * @param second
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").replaceSecond(3)
+   *   // -> 2020-01-01T10:00:03
+   * ```
+   */
+  replaceSecond(second: number): DateTime {
+    return new DateTime(this._value.second(second));
+  }
+
+  /**
    * @param months
    *
    * @example
