@@ -43,6 +43,14 @@ make test
 
 ### Release
 
+#### Recommended
+
+Release with GitHub Actions
+
+https://github.com/tadashi-aikawa/owlelia/actions?query=workflow%3ARelease
+
+#### Manually
+
 ```
 make release version=x.y.z
 ```
