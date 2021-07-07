@@ -575,6 +575,66 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-12-06 23:59:59"} | ${false}
+    ${"2020-12-07 00:00:00"} | ${true}
+    ${"2020-12-07 23:59:59"} | ${true}
+    ${"2020-12-08 00:00:00"} | ${false}
+  `("isMonday", ({ self, expected }) => {
+    test(`(${self}).isMonday = ${expected}`, () => {
+      expect(DateTime.of(self).isMonday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-07 23:59:59"} | ${false}
+    ${"2020-12-08 00:00:00"} | ${true}
+    ${"2020-12-08 23:59:59"} | ${true}
+    ${"2020-12-09 00:00:00"} | ${false}
+  `("isTuesday", ({ self, expected }) => {
+    test(`(${self}).isTuesday = ${expected}`, () => {
+      expect(DateTime.of(self).isTuesday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-08 23:59:59"} | ${false}
+    ${"2020-12-09 00:00:00"} | ${true}
+    ${"2020-12-09 23:59:59"} | ${true}
+    ${"2020-12-10 00:00:00"} | ${false}
+  `("isWednesday", ({ self, expected }) => {
+    test(`(${self}).isWednesday = ${expected}`, () => {
+      expect(DateTime.of(self).isWednesday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-09 23:59:59"} | ${false}
+    ${"2020-12-10 00:00:00"} | ${true}
+    ${"2020-12-10 23:59:59"} | ${true}
+    ${"2020-12-11 00:00:00"} | ${false}
+  `("isThursday", ({ self, expected }) => {
+    test(`(${self}).isThursday = ${expected}`, () => {
+      expect(DateTime.of(self).isThursday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
+    ${"2020-12-10 23:59:59"} | ${false}
+    ${"2020-12-11 00:00:00"} | ${true}
+    ${"2020-12-11 23:59:59"} | ${true}
+    ${"2020-12-12 00:00:00"} | ${false}
+  `("isFriday", ({ self, expected }) => {
+    test(`(${self}).isFriday = ${expected}`, () => {
+      expect(DateTime.of(self).isFriday).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-12-04 00:00:00"} | ${false}
     ${"2020-12-05 10:00:00"} | ${true}
     ${"2020-12-06 23:59:59"} | ${false}

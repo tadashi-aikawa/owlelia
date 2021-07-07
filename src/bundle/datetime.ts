@@ -607,6 +607,71 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @example 2020-12-07(Mon)
+   * ```typescript
+   * DateTime.of("2020-12-07 00:00:00").isMonday
+   *   // -> true
+   * DateTime.of("2020-12-07 23:59:59").isMonday
+   *   // -> true
+   * ```
+   */
+  get isMonday(): boolean {
+    return this._value.day() === 1;
+  }
+
+  /**
+   * @example 2020-12-08(Tue)
+   * ```typescript
+   * DateTime.of("2020-12-08 00:00:00").isTuesday
+   *   // -> true
+   * DateTime.of("2020-12-08 23:59:59").isTuesday
+   *   // -> true
+   * ```
+   */
+  get isTuesday(): boolean {
+    return this._value.day() === 2;
+  }
+
+  /**
+   * @example 2020-12-09(Wed)
+   * ```typescript
+   * DateTime.of("2020-12-09 00:00:00").isWednesday
+   *   // -> true
+   * DateTime.of("2020-12-09 23:59:59").isWednesday
+   *   // -> true
+   * ```
+   */
+  get isWednesday(): boolean {
+    return this._value.day() === 3;
+  }
+
+  /**
+   * @example 2020-12-10(Thu)
+   * ```typescript
+   * DateTime.of("2020-12-10 00:00:00").isThursday
+   *   // -> true
+   * DateTime.of("2020-12-10 23:59:59").isThursday
+   *   // -> true
+   * ```
+   */
+  get isThursday(): boolean {
+    return this._value.day() === 4;
+  }
+
+  /**
+   * @example 2020-12-11(Fri)
+   * ```typescript
+   * DateTime.of("2020-12-11 00:00:00").isFriday
+   *   // -> true
+   * DateTime.of("2020-12-11 23:59:59").isFriday
+   *   // -> true
+   * ```
+   */
+  get isFriday(): boolean {
+    return this._value.day() === 5;
+  }
+
+  /**
    * @example 2020-12-04(Fri), 2020-12-05(Sat), 2020-12-06(Sun)
    * ```typescript
    * DateTime.of("2020-12-04 00:00:00").isSunday
@@ -618,7 +683,6 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   get isSaturday(): boolean {
-    // TODO: Remove a magic number
     return this._value.day() === 6;
   }
 
@@ -634,7 +698,6 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   get isSunday(): boolean {
-    // TODO: Remove a magic number
     return this._value.day() === 0;
   }
 
