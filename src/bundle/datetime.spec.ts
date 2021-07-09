@@ -773,6 +773,16 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-01-01 00:01:30"} | ${"20200101"}
+    ${"2020-10-10 13:10:00"} | ${"20201010"}
+  `("yyyyMMdd", ({ self, expected }) => {
+    test(`(${self}).yyyyMMdd = ${expected}`, () => {
+      expect(DateTime.of(self).yyyyMMdd).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-01 00:01:30"} | ${"20200101000130"}
     ${"2020-10-10 13:10:00"} | ${"20201010131000"}
   `("yyyyMMddHHmmss", ({ self, expected }) => {

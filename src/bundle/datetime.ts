@@ -818,6 +818,13 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * ex: 2020-10-02 08:23:01 -> 20201002
+   */
+  get yyyyMMdd(): string {
+    return this._value.format("YYYYMMDD");
+  }
+
+  /**
    * ex: 2020-10-02 08:23:01 -> 20201002082301
    */
   get yyyyMMddHHmmss(): string {
