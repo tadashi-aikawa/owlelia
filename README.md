@@ -47,7 +47,7 @@ make test
 
 Release with GitHub Actions
 
-https://github.com/tadashi-aikawa/owlelia/actions?query=workflow%3ARelease
+https://github.com/tadashi-aikawa/owlelia/actions/workflows/release.yaml?query=workflow%3ARelease
 
 #### Manually
 
