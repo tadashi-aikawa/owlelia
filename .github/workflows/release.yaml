@@ -1,28 +1,23 @@
 name: "Release"
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "Release version (ex: 2.3.1)"
-        required: true
+  push:
+    tags:
+      - v*
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: arduino/setup-task@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: 14.x
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "14"
+          registry-url: "https://registry.npmjs.org"
 
-      - run: npm install
-      - run: |
-          git config user.email "github-actions@users.noreply.github.com"
-          git config user.name "GitHub Actions"
       - name: Release
-        run: make release version=${{ github.event.inputs.version }}
+        run: task release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -32,7 +27,7 @@ jobs:
         with:
           type: ${{ job.status }}
           username: GitHub Actions (Failure)
-          job_name: ":owlelia: Release v${{ github.event.inputs.version }}"
+          job_name: ":owlelia: Release ${{ github.ref }}"
           mention: channel
           mention_if: always
           icon_emoji: "github"
@@ -49,6 +44,6 @@ jobs:
         with:
           type: ${{ job.status }}
           username: GitHub Actions (Success)
-          job_name: ":owlelia: Release v${{ github.event.inputs.version }}"
+          job_name: ":owlelia: Release ${{ github.ref }}"
           icon_emoji: ":github:"
           url: ${{ secrets.SLACK_WEBHOOK }}

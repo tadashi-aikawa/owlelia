@@ -1,5 +1,4 @@
-Owlelia
-=======
+# Owlelia
 
 Utility for DDD 🦉
 
@@ -10,47 +9,38 @@ Utility for DDD 🦉
 
 <img src="https://github.com/tadashi-aikawa/owlelia/raw/master/logo.svg?sanitize=true" width=300 alt="logo" />
 
+## Install
 
-Install
--------
-
-```
+```console
 npm i owlelia
 ```
 
-
-Sample
-------
+## Sample
 
 There are some sample codes which use _owlelia_ in `./sample`.
 
-
-For developers
---------------
+## For developers
 
 ### Requirements
 
-Node.js >= 0.12 
+Node.js >= 0.12
 
 ### Develop
 
-```
-# Install dependencies
-make init-develop
-# Test
-make test
+Before, you need to install [Task].
+
+```console
+task install
+task build
+task test
 ```
 
 ### Release
 
-#### Recommended
-
-Release with GitHub Actions
-
-https://github.com/tadashi-aikawa/owlelia/actions/workflows/release.yaml?query=workflow%3ARelease
-
-#### Manually
-
 ```
-make release version=x.y.z
+task release VERSION=x.y.z
 ```
+
+Then, GitHub Actions will automatically package and upload Owlelia.
+
+[task]: https://github.com/go-task/task

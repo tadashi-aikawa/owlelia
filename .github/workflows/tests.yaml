@@ -21,14 +21,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - uses: arduino/setup-task@v1
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
 
-      - run: npm install
-      - run: npm run build
-
-      - run: npm test
+      - run: task install
+      - run: task build
+      - run: task test
       - uses: codecov/codecov-action@v1
         if: "matrix.node == '12.x' && success()"
         with:

@@ -1,0 +1,51 @@
+version: "3"
+
+tasks:
+  default:
+    - task: help
+
+  help:
+    silent: true
+    cmds:
+      - task -l
+
+  install:
+    desc: Install dependencies
+    cmds:
+      - npm install
+
+  build:
+    desc: Build
+    cmds:
+      - npm run build
+
+  test:
+    desc: Unit tests
+    cmds:
+      - npm run test
+
+  version-up:
+    desc: |
+      Build
+          ∟ [Ex] task version-up VERSION=1.2.3
+    deps:
+      - build
+      - test
+    cmds:
+      - git fetch --all
+      - git checkout master
+      - git pull
+      - npm version {{.VERSION}}
+      - git push
+      - git push --tags
+    preconditions:
+      - sh: "[ {{.VERSION}} != '' ]"
+        msg: "VERSION is required."
+
+  release:
+    desc: Packaging and uploading to npm
+    cmds:
+      - task: install
+      - task: build
+      - task: test
+      - npm publish
