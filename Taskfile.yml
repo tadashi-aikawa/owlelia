@@ -49,3 +49,6 @@ tasks:
       - task: build
       - task: test
       - npm publish
+    preconditions:
+      - sh: "[ {{.VERSION}} = '' ]"
+        msg: "An unnecessary argument, VERSION is specified. Did you mean 'task version-up'?"

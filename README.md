@@ -38,7 +38,7 @@ task test
 ### Release
 
 ```
-task release VERSION=x.y.z
+task version-up VERSION=x.y.z
 ```
 
 Then, GitHub Actions will automatically package and upload Owlelia.
