@@ -48,5 +48,8 @@
   "dependencies": {
     "dayjs": "^1.9.7",
     "tslib": "^2.0.3"
+  },
+  "volta": {
+    "node": "14.17.5"
   }
 }
