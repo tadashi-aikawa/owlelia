@@ -34,29 +34,25 @@ jobs:
         with:
           file: ./coverage/clover.xml
 
-      - name: "Slack notification (not success)"
-        uses: lazy-actions/slatify@master
+      - name: "Discord notification (not success)"
+        uses: rjstone/discord-webhook-notify@v1
         if: "! success()"
         with:
-          type: ${{ job.status }}
-          username: GitHub Actions (Failure)
-          job_name: ":owlelia::nodejs:*${{ matrix.node }}* Tests"
-          mention: channel
-          mention_if: always
-          icon_emoji: "github"
-          url: ${{ secrets.SLACK_WEBHOOK }}
+            severity: error
+            details: "👑 Owlelia Tests failed!"
+            footer: "Node.js v*${{ matrix.node }}*"
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   notify:
     needs: test
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Slack Notification (success)"
-        uses: lazy-actions/slatify@master
+      - name: "Discord notification (success)"
+        uses: rjstone/discord-webhook-notify@v1
         if: always()
         with:
-          type: ${{ job.status }}
-          username: GitHub Actions (Success)
-          job_name: ":owlelia::nodejs: All tests"
-          icon_emoji: ":github:"
-          url: ${{ secrets.SLACK_WEBHOOK }}
+          severity: info
+          details: "👑 Owlelia Tests passed!"
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
