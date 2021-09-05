@@ -37,6 +37,8 @@ task test
 
 ### Release
 
+- [ ] Don't you need to add some exports to `index.ts`?
+
 ```
 task version-up VERSION=x.y.z
 ```
