@@ -22,7 +22,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: "Slack notification (not success)"
-        uses: homoluctus/slatify@master
+        uses: lazy-actions/slatify@master
         if: "! success()"
         with:
           type: ${{ job.status }}
@@ -39,7 +39,7 @@ jobs:
 
     steps:
       - name: "Slack Notification (success)"
-        uses: homoluctus/slatify@master
+        uses: lazy-actions/slatify@master
         if: always()
         with:
           type: ${{ job.status }}
