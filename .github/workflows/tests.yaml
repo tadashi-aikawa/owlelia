@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["12.x", "14.x"]
+        node: [ "12.x", "14.x" ]
     name: Node ${{ matrix.node }}
 
     steps:
@@ -38,11 +38,11 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: "! success()"
         with:
-            severity: error
-            avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
-            details: "👑 Owlelia Tests failed!"
-            footer: "Node.js v*${{ matrix.node }}*"
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          details: "👑 Owlelia Tests failed!"
+          footer: "Node.js v*${{ matrix.node }}*"
+          severity: error
+          avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   notify:
     needs: test
@@ -53,8 +53,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: always()
         with:
+          details: "👑 Owlelia Tests passed!"
           severity: info
           avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
-          details: "👑 Owlelia Tests passed!"
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
