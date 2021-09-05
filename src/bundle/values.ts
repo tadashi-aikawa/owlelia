@@ -1,5 +1,6 @@
 import { AsyncResult, Nullable } from "../result";
 import { BaseError } from "../error";
+import { isEmpty } from "./utils";
 
 interface LiquidValueLoadOption {
   silent?: boolean;
@@ -18,6 +19,10 @@ export class LiquidValue<T, E = BaseError> {
     public error: Nullable<E> = null
   ) {
     this.initialValue = value;
+  }
+
+  isEmpty(): boolean {
+    return isEmpty(this.value);
   }
 
   async load(

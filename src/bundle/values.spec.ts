@@ -14,6 +14,23 @@ function expectLiquidValue(
 }
 
 describe("LiquidValue", () => {
+  describe("empty", () => {
+    test("Initial is empty", async () => {
+      const v = new LiquidValue<string>("");
+      expect(v.isEmpty()).toBeTruthy();
+    });
+    test("Not empty", async () => {
+      const v = new LiquidValue<string>("");
+      await v.load(async () => ok("ok"));
+      expect(v.isEmpty()).toBeFalsy();
+    });
+    test("Still empty", async () => {
+      const v = new LiquidValue<string>("");
+      await v.load(async () => err(new BaseError("error")));
+      expect(v.isEmpty()).toBeTruthy();
+    });
+  });
+
   describe("default option", () => {
     test("init -> success", async () => {
       const v = new LiquidValue<string>("");

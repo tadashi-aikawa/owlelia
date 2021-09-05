@@ -1,4 +1,4 @@
-import { round } from "./utils";
+import { isEmpty, round } from "./utils";
 
 describe.each`
   n          | decimalPlace | expected
@@ -7,5 +7,25 @@ describe.each`
 `("round", ({ n, decimalPlace, expected }) => {
   test(`round(${n}, ${decimalPlace}) = ${expected}`, () => {
     expect(round(n, decimalPlace)).toBe(expected);
+  });
+});
+
+describe.each`
+  n                   | expected
+  ${0}                | ${true}
+  ${1}                | ${false}
+  ${-1}               | ${false}
+  ${""}               | ${true}
+  ${" "}              | ${false}
+  ${"a"}              | ${false}
+  ${{}}               | ${true}
+  ${{ a: undefined }} | ${false}
+  ${[]}               | ${true}
+  ${[""]}             | ${false}
+  ${undefined}        | ${true}
+  ${null}             | ${true}
+`("isEmpty", ({ n, expected }) => {
+  test(`isEmpty(${n}) = ${expected}`, () => {
+    expect(isEmpty(n)).toBe(expected);
   });
 });
