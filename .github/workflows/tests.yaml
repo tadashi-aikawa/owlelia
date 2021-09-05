@@ -39,6 +39,7 @@ jobs:
         if: "! success()"
         with:
             severity: error
+            avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
             details: "👑 Owlelia Tests failed!"
             footer: "Node.js v*${{ matrix.node }}*"
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
@@ -53,6 +54,7 @@ jobs:
         if: always()
         with:
           severity: info
+          avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
           details: "👑 Owlelia Tests passed!"
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 

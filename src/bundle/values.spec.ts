@@ -194,7 +194,7 @@ describe("LiquidValue", () => {
       const promise = v.load(async () => err(new BaseError("error")), {
         clearValueBeforeLoading: true,
       });
-      expectLiquidValue(v, "", true);
+      expectLiquidValue(v, "", false);
       await promise;
       expectLiquidValue(v, "", false, "error");
     });
