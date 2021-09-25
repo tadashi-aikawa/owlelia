@@ -54,7 +54,7 @@ jobs:
         if: always()
         with:
           description: "✅ Owlelia Tests passed!"
-          footer: "Python v*12/14*"
+          footer: "Node.js v*12/14*"
           severity: info
           avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
