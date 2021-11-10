@@ -112,7 +112,7 @@ export async function fromPromise<T, E extends Error>(
 ): AsyncResult<T, E> {
   try {
     return ok(await promise);
-  } catch (e) {
+  } catch (e: any) {
     return err(e);
   }
 }
