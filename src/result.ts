@@ -1,4 +1,5 @@
 class Ok<T, E> {
+  // noinspection JSUnusedLocalSymbols
   private _type = "ok" as const;
   constructor(public value: T) {}
 
@@ -14,8 +15,7 @@ class Ok<T, E> {
   get _ok(): T | undefined {
     return this.value;
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  mapErr<ER>(functor: (err: E) => ER): Result<T, ER> {
+  mapErr<ER>(_functor: (err: E) => ER): Result<T, ER> {
     return new Ok(this.value);
   }
   map<TR>(functor: (value: T) => TR): Result<TR, E> {
@@ -28,7 +28,7 @@ class Ok<T, E> {
     return this.mapErr(errFunctor).map(functor);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // noinspection JSUnusedLocalSymbols
   or(value: T): T {
     return this.value;
   }
@@ -44,6 +44,7 @@ class Ok<T, E> {
 }
 
 class Err<T, E> {
+  // noinspection JSUnusedLocalSymbols
   private _type = "err" as const;
   constructor(public error: E) {}
 
@@ -62,7 +63,7 @@ class Err<T, E> {
   mapErr<ER>(functor: (err: E) => ER): Result<T, ER> {
     return new Err(functor(this.error));
   }
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // noinspection JSUnusedLocalSymbols
   map<TR>(functor: (value: T) => TR): Result<TR, E> {
     return new Err(this.error);
   }
@@ -95,7 +96,9 @@ export type AsyncNullable<T> = Promise<Nullable<T>>;
 export const err = <T, E>(error: E): Err<T, E> => new Err(error);
 export const ok = <T, E>(value: T): Ok<T, E> => new Ok(value);
 
-export function aggregate<T, E>(results: Result<T, E[]>[]): Result<T[], E[]> {
+export function aggregate<T, E>(
+  results: Result<T, E | E[]>[]
+): Result<T[], E[]> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const errors = results.filter((x) => x.isErr()).flatMap((x) => x._err!);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

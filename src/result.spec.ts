@@ -164,7 +164,31 @@ describe("aggregate", () => {
     expect(actual.value).toStrictEqual([1, 2]);
   });
 
-  test("can aggregate errors as Left", () => {
+  test("can aggregate errors as Err from Error", () => {
+    const actual = aggregate([
+      getResult<number>({
+        error: TestError.of({ invalidReason: "expected1" }),
+      }),
+      getResult<number>({
+        value: 1,
+      }),
+      getResult<number>({
+        error: TestError.of({ invalidReason: "expected3" }),
+      }),
+    ]);
+
+    if (!actual.isErr()) {
+      fail("actual must be Err!");
+    }
+    expect(actual._ok).toBeUndefined();
+
+    expect(actual.error.length).toBe(2);
+    expect(actual.error.map((x) => x.message)).toStrictEqual([
+      "失敗の理由: expected1",
+      "失敗の理由: expected3",
+    ]);
+  });
+  test("can aggregate errors as Err from Error[]", () => {
     const actual = aggregate([
       getResult<number, TestError[]>({
         error: TestError.listOf([
