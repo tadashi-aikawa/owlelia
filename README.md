@@ -23,7 +23,8 @@ There are some sample codes which use _owlelia_ in `./sample`.
 
 ### Requirements
 
-Node.js >= 0.12
+- Node.js >= 0.12
+- TypeScript >= 4.1
 
 ### Develop
 
