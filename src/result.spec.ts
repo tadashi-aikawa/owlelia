@@ -1,4 +1,4 @@
-import { aggregate, Result, err, ok } from "./result";
+import { aggregate, Result, err, ok, fromPromise } from "./result";
 import { BaseError } from "./error";
 
 export class TestError extends BaseError {
@@ -215,5 +215,40 @@ describe("aggregate", () => {
       "失敗の理由: expected2",
       "失敗の理由: expected3",
     ]);
+  });
+});
+
+describe("fromPromise", () => {
+  // noinspection NestedFunctionJS
+  function asyncOperation(
+    a: number,
+    b: string,
+    occurError: boolean
+  ): Promise<string> {
+    return occurError
+      ? Promise.reject(new Error("Fail to asyncOperation"))
+      : Promise.resolve(`Success to asyncOperation`);
+  }
+
+  test("returns Ok if resolved", async () => {
+    const actual = await fromPromise(asyncOperation(1, "2", false));
+
+    if (!actual.isOk()) {
+      fail("actual must be Ok!");
+    }
+    expect(actual._err).toBeUndefined();
+
+    expect(actual.value).toBe("Success to asyncOperation");
+  });
+
+  test("returns Err if rejected", async () => {
+    const actual = await fromPromise(asyncOperation(1, "2", true));
+
+    if (!actual.isErr()) {
+      fail("actual must be Err!");
+    }
+    expect(actual._ok).toBeUndefined();
+
+    expect(actual.error.message).toBe("Fail to asyncOperation");
   });
 });

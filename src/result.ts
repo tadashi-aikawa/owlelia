@@ -106,3 +106,13 @@ export function aggregate<T, E>(
 
   return errors.length > 0 ? err(errors) : ok(values);
 }
+
+export async function fromPromise<T, E extends Error>(
+  promise: Promise<T>
+): AsyncResult<T, E> {
+  try {
+    return ok(await promise);
+  } catch (e) {
+    return err(e);
+  }
+}
