@@ -431,6 +431,57 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
     return this._value.startOf("day").diff(date._value.startOf("day"), "day");
   }
 
+  /**
+   * @param date
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2021-01-01 10:00:00").diffHours(DateTime.of("2020-12-30 22:00:00"))
+   *   // -> 36
+   * DateTime.of("2019-12-31 23:59:59").diffHours(DateTime.of("2020-01-01 00:00:00"))
+   *   // -> -1
+   * ```
+   */
+  diffHours(date: DateTime): number {
+    return this._value
+      .startOf("hour")
+      .diff(date._value.startOf("hour"), "hour");
+  }
+
+  /**
+   * @param date
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2021-01-01 10:00:00").diffMinutes(DateTime.of("2020-12-30 22:00:00"))
+   *   // -> 2160
+   * DateTime.of("2019-12-31 23:59:59").diffMinutes(DateTime.of("2020-01-01 00:00:00"))
+   *   // -> -1
+   * ```
+   */
+  diffMinutes(date: DateTime): number {
+    return this._value
+      .startOf("minute")
+      .diff(date._value.startOf("minute"), "minute");
+  }
+
+  /**
+   * @param date
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2021-01-01 10:00:00").diffSeconds(DateTime.of("2020-12-30 22:00:00"))
+   *   // -> 129600
+   * DateTime.of("2019-12-31 23:59:59").diffSeconds(DateTime.of("2020-01-01 00:00:00"))
+   *   // -> -1
+   * ```
+   */
+  diffSeconds(date: DateTime): number {
+    return this._value
+      .startOf("second")
+      .diff(date._value.startOf("second"), "second");
+  }
+
   diffMinutesFromNow(): number {
     return DateTime.now()._value.diff(this._value, "minute");
   }

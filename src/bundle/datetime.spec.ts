@@ -296,10 +296,44 @@ describe("DateTime", () => {
     date                     | self                     | expected
     ${"2020-12-30 22:00:00"} | ${"2021-01-01 10:00:00"} | ${2}
     ${"2020-01-01 00:00:00"} | ${"2019-12-31 23:59:59"} | ${-1}
-    ${"2020-10-01 00:00:00"} | ${"2020-12-01 23:59:59"} | ${61}
+    ${"2020-10-01 00:00:00"} | ${"2020-12-01 23:59:59"} | ${30 + 31}
   `("diffDays", ({ date, self, expected }) => {
     test(`(${self}).diffDays(${date}) = ${expected}`, () => {
       expect(DateTime.of(self).diffDays(DateTime.of(date))).toBe(expected);
+    });
+  });
+
+  describe.each`
+    date                     | self                     | expected
+    ${"2020-12-30 22:00:00"} | ${"2021-01-01 10:00:00"} | ${36}
+    ${"2020-01-01 00:00:00"} | ${"2019-12-31 23:59:59"} | ${-1}
+    ${"2020-10-01 00:00:00"} | ${"2020-12-01 23:59:59"} | ${(30 + 31) * 24 + 23}
+  `("diffHours", ({ date, self, expected }) => {
+    test(`(${self}).diffHours(${date}) = ${expected}`, () => {
+      expect(DateTime.of(self).diffHours(DateTime.of(date))).toBe(expected);
+    });
+  });
+
+  describe.each`
+    date                     | self                     | expected
+    ${"2020-12-30 22:00:00"} | ${"2021-01-01 10:00:00"} | ${2160}
+    ${"2020-01-01 00:00:00"} | ${"2019-12-31 23:59:59"} | ${-1}
+    ${"2020-10-01 00:00:00"} | ${"2020-12-01 23:59:59"} | ${((30 + 31) * 24 + 23) * 60 + 59}
+  `("diffMinutes", ({ date, self, expected }) => {
+    test(`(${self}).diffMinutes(${date}) = ${expected}`, () => {
+      expect(DateTime.of(self).diffMinutes(DateTime.of(date))).toBe(expected);
+    });
+  });
+
+  // noinspection OverlyComplexArithmeticExpressionJS
+  describe.each`
+    date                     | self                     | expected
+    ${"2020-12-30 22:00:00"} | ${"2021-01-01 10:00:00"} | ${129600}
+    ${"2020-01-01 00:00:00"} | ${"2019-12-31 23:59:59"} | ${-1}
+    ${"2020-10-01 00:00:00"} | ${"2020-12-01 23:59:59"} | ${(((30 + 31) * 24 + 23) * 60 + 59) * 60 + 59}
+  `("diffSeconds", ({ date, self, expected }) => {
+    test(`(${self}).diffSeconds(${date}) = ${expected}`, () => {
+      expect(DateTime.of(self).diffSeconds(DateTime.of(date))).toBe(expected);
     });
   });
 
