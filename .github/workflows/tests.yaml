@@ -20,16 +20,16 @@ jobs:
     name: Node ${{ matrix.node }}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: arduino/setup-task@v1
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
       - run: task install
       - run: task build
       - run: task test
-      - uses: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v3
         if: "matrix.node == '18.x' && success()"
         with:
           file: ./coverage/clover.xml
