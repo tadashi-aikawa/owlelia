@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["12.x", "14.x", "16.x"]
+        node: ["16.x", "18.x"]
     name: Node ${{ matrix.node }}
 
     steps:
@@ -30,7 +30,7 @@ jobs:
       - run: task build
       - run: task test
       - uses: codecov/codecov-action@v1
-        if: "matrix.node == '12.x' && success()"
+        if: "matrix.node == '18.x' && success()"
         with:
           file: ./coverage/clover.xml
 
@@ -54,7 +54,7 @@ jobs:
         if: always()
         with:
           description: "✅ Owlelia Tests passed!"
-          footer: "Node.js v*12/14/16*"
+          footer: "Node.js v*16/18*"
           severity: info
           avatarUrl: https://www.suruga-ya.jp/database/pics_light/game/871005085.jpg
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
