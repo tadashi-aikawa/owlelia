@@ -55,6 +55,15 @@ describe("Result -> Ok", () => {
     expect(actual._err).toBeUndefined();
   });
 
+  test("transform value by fold", () => {
+    const actual = getResult({ value: 3 }).fold(
+      (x) => String(x * 2),
+      (err) => err.message
+    );
+
+    expect(actual).toBe("6");
+  });
+
   test("get value by or", () => {
     const actual = getResult({ value: "hoge" });
     expect(actual.or("alternative")).toBe("hoge");
@@ -115,6 +124,16 @@ describe("Result -> Err", () => {
 
     expect(actual._err).toBe("失敗の理由: expected");
     expect(actual._ok).toBeUndefined();
+  });
+
+  test("transform value by fold", () => {
+    const error = TestError.of({ invalidReason: "expected" });
+    const actual = getResult({ error }).fold(
+      (x: number) => String(x * 2),
+      (err) => err.message
+    );
+
+    expect(actual).toBe("失敗の理由: expected");
   });
 
   test("get alternative value by or", () => {

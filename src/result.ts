@@ -27,6 +27,9 @@ class Ok<T, E> {
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
   }
+  fold<U>(functor: (value: T) => U, errFunctor: (err: E) => U): U {
+    return functor(this.value);
+  }
 
   // noinspection JSUnusedLocalSymbols
   or(value: T): T {
@@ -72,6 +75,9 @@ class Err<T, E> {
     errFunctor: (err: E) => ER
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
+  }
+  fold<U>(functor: (value: T) => U, errFunctor: (err: E) => U): U {
+    return errFunctor(this.error);
   }
 
   or(value: T): T {
