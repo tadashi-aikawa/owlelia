@@ -31,7 +31,7 @@ class Ok<T, E> {
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
   }
-  fold<U>(functor: (value: T) => U, errFunctor: (err: E) => U): U {
+  fold<U>(functor: (value: T) => U, _errFunctor: (err: E) => U): U {
     return functor(this.value);
   }
 

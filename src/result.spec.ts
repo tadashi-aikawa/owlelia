@@ -152,7 +152,7 @@ describe("Result -> Err", () => {
   test("get undefined by orUndefined", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getResult({ error });
-    expect(actual.orUndefined()).toBeUndefined;
+    expect(actual.orUndefined()).toBeUndefined();
   });
 
   test("get error by unwrap", () => {
