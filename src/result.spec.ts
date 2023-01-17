@@ -83,6 +83,13 @@ describe("Result -> Ok", () => {
     const actual = getResult({ value: "hoge" });
     expect(actual.orThrow()).toBe("hoge");
   });
+
+  test("get value by unwrap", () => {
+    const [actual, error] = getResult({ value: "hoge" }).unwrap();
+
+    expect(actual).toBe("hoge");
+    expect(error).toBeUndefined();
+  });
 });
 
 describe("Result -> Err", () => {
@@ -128,7 +135,7 @@ describe("Result -> Err", () => {
 
   test("transform value by fold", () => {
     const error = TestError.of({ invalidReason: "expected" });
-    const actual = getResult({ error }).fold(
+    const actual = getResult<number>({ error }).fold(
       (x: number) => String(x * 2),
       (err) => err.message
     );
@@ -146,6 +153,15 @@ describe("Result -> Err", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getResult({ error });
     expect(actual.orUndefined()).toBeUndefined;
+  });
+
+  test("get error by unwrap", () => {
+    const [actual, error] = getResult({
+      error: TestError.of({ invalidReason: "expected" }),
+    }).unwrap();
+
+    expect(actual).toBeUndefined();
+    expect(error!.message).toBe("失敗の理由: expected");
   });
 
   test("get null by orNull", () => {

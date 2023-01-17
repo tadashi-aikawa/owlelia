@@ -3,6 +3,10 @@ class Ok<T, E> {
   private _type = "ok" as const;
   constructor(public value: T) {}
 
+  unwrap(): [T, undefined] {
+    return [this.value, undefined];
+  }
+
   isErr(): this is Err<T, E> {
     return false;
   }
@@ -50,6 +54,10 @@ class Err<T, E> {
   // noinspection JSUnusedLocalSymbols
   private _type = "err" as const;
   constructor(public error: E) {}
+
+  unwrap(): [undefined, E] {
+    return [undefined, this.error];
+  }
 
   isErr(): this is Err<T, E> {
     return true;
