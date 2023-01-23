@@ -20,6 +20,20 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    value           | format          | expected
+    ${"2020-02-02"} | ${"YYYY-MM-DD"} | ${"2020-02-02T00:00:00"}
+    ${"02-02-2020"} | ${"MM-DD-YYYY"} | ${"2020-02-02T00:00:00"}
+    ${"20_02_02"}   | ${"YY_MM_DD"}   | ${"2020-02-02T00:00:00"}
+    ${"2020/02/02"} | ${undefined}    | ${"2020-02-02T00:00:00"}
+  `("DateTime.from", ({ value, format, expected }) => {
+    test(`DateTime.from(${value}, ${format}) = ${expected}`, () => {
+      expect(DateTime.from(value, format).rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     now                      | expected
     ${"2020-01-01 00:03:00"} | ${"2020-01-01T00:03:00"}
     ${"2020-01-01 23:03:00"} | ${"2020-01-01T23:03:00"}

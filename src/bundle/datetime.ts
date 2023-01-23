@@ -2,6 +2,9 @@ import { ValueObject } from "../vo";
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(customParseFormat);
+
 const pad00 = (v: number): string => String(v).padStart(2, "0");
 
 function keyBy<T>(xs: T[], toKey: (x: T) => string): { [key: string]: T } {
@@ -52,7 +55,6 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *
    * @example
    * ```typescript
-   *
    * DateTime.of("2020-02-02")
    *   // -> 2020-02-02T00:00:00
    * DateTime.of("2020-02-02 10:10:10")
@@ -65,11 +67,29 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *   // -> 2020-01-01T00:01:30
    * DateTime.of(1633579856)
    *   // -> 2021-10-07T14:23:47
+   * ```
    */
   static of(value: string | Date | number): DateTime {
     return new DateTime(
       dayjs(typeof value === "number" ? value * 1000 : value)
     );
+  }
+
+  /**
+   * Create instance from specific formats.
+   * @param value
+   * @param format [Available format](https://day.js.org/docs/en/parse/string-format#list-of-all-available-parsing-tokens)
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("02-02-2020", "MM-DD-YYYY")
+   *   // -> 2020-02-02T00:00:00
+   * DateTime.of("2020-02-02")
+   *   // -> 2020-02-02T00:00:00
+   * ```
+   */
+  static from(value: string, format?: string): DateTime {
+    return new DateTime(dayjs(value, format));
   }
 
   /**
