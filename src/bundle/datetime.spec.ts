@@ -286,6 +286,19 @@ describe("DateTime", () => {
   });
 
   describe.each`
+    self                     | expected
+    ${"2020-01-01 10:00:00"} | ${"2020-01-31T23:59:59"}
+    ${"2020-02-02 10:00:00"} | ${"2020-02-29T23:59:59"}
+    ${"2020-04-04 10:00:00"} | ${"2020-04-30T23:59:59"}
+  `("endOfMonth", ({ self, expected }) => {
+    test(`(${self}).endOfMonth() = ${expected}`, () => {
+      expect(DateTime.of(self).endOfMonth().rfc3339).toMatch(
+        new RegExp(`^${expected}.+`)
+      );
+    });
+  });
+
+  describe.each`
     self                     | date                     | expected
     ${"2020-01-01 10:00:00"} | ${"2020-02-02 17:00:00"} | ${"2020-02-02T10:00:00"}
   `("overwriteDate", ({ self, date, expected }) => {

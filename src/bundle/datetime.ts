@@ -400,6 +400,19 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @param days
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").endOfMonth()
+   *   // -> 2020-01-31T10:00:00
+   * ```
+   */
+  endOfMonth(): DateTime {
+    return new DateTime(this._value.endOf("month"));
+  }
+
+  /**
    * Only overwrite year, month, and date.
    * @param date
    *
