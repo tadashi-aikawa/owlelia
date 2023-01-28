@@ -773,6 +773,18 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2023-02-04 00:00:00"} | ${1}
+    ${"2023-02-05 00:00:00"} | ${1}
+    ${"2023-02-11 00:00:00"} | ${2}
+    ${"2023-02-12 00:00:00"} | ${2}
+  `("nthDayOfWeek", ({ self, expected }) => {
+    test(`(${self}).nthDayOfWeek = ${expected}`, () => {
+      expect(DateTime.of(self).nthDayOfWeek).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-01 00:01:30"} | ${new Date(2020, 0, 1, 0, 1, 30, 0).getTime()}
   `("date", ({ self, expected }) => {
     test(`(${self}).date = ${expected}`, () => {

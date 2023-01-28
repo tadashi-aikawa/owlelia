@@ -872,6 +872,23 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   /**
    * @example
    * ```typescript
+   * DateTime.of("2023-02-04 00:00:00").isNthDayOfWeek()
+   *   // -> 1
+   * DateTime.of("2023-02-05 00:00:00").isNthDayOfWeek()
+   *   // -> 1
+   * DateTime.of("2023-02-11 00:00:00").isNthDayOfWeek()
+   *   // -> 2
+   * DateTime.of("2023-02-12 00:00:00").isNthDayOfWeek()
+   *   // -> 2
+   * ```
+   */
+  get nthDayOfWeek(): number {
+    return Math.ceil(this.day / 7);
+  }
+
+  /**
+   * @example
+   * ```typescript
    * DateTime.of("2020-01-01 00:01:30").date
    *   // -> equals to new Date(2020, 0, 1, 0, 1, 30, 0)
    * ```
