@@ -97,9 +97,9 @@ describe("DateTime", () => {
     ${"2020-01-03 10:00:00"} | ${"2020-01-01 10:00:00"} | ${["2020-01-03T00:00:00", "2020-01-02T00:00:00", "2020-01-01T00:00:00"]}
     ${"2020-12-31 00:00:00"} | ${"2021-01-01 00:00:00"} | ${["2020-12-31T00:00:00", "2021-01-01T00:00:00"]}
     ${"2021-01-01 00:00:00"} | ${"2020-12-31 00:00:00"} | ${["2021-01-01T00:00:00", "2020-12-31T00:00:00"]}
-  `("untilDate", ({ self, end, expected }) => {
-    test(`(${self}).untilDate(${end}) = ${expected}`, () => {
-      const actual = DateTime.of(self).untilDate(DateTime.of(end));
+  `("toDate", ({ self, end, expected }) => {
+    test(`(${self}).toDate(${end}) = ${expected}`, () => {
+      const actual = DateTime.of(self).toDate(DateTime.of(end));
       actual.forEach((a, i) => {
         console.log(expected[i]);
         expect(a.rfc3339).toMatch(new RegExp(`^${expected[i]}.+`));

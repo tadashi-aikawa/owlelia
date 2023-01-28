@@ -172,13 +172,13 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *
    * @example
    * ```typescript
-   * DateTime.of("2020-01-01 10:00:00").untilDate(DateTime.of("2020-01-03 10:00:00"))
+   * DateTime.of("2020-01-01 10:00:00").toDate(DateTime.of("2020-01-03 10:00:00"))
    *   // -> [2020-01-01T00:00:00, 2020-01-02T00:00:00, 2020-01-03T00:00:00]
-   * DateTime.of("2020-01-03 10:00:00").untilDate(DateTime.of("2020-01-01 10:00:00"))
+   * DateTime.of("2020-01-03 10:00:00").toDate(DateTime.of("2020-01-01 10:00:00"))
    *   // -> [2020-01-03T00:00:00, 2020-01-02T00:00:00, 2020-01-01T00:00:00]
    * ```
    */
-  untilDate(end: DateTime): DateTime[] {
+  toDate(end: DateTime): DateTime[] {
     let bd = this.midnight();
     let ed = end.midnight();
 
