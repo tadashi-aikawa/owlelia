@@ -168,6 +168,35 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @param end
+   *
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:00:00").untilDate(DateTime.of("2020-01-03 10:00:00"))
+   *   // -> [2020-01-01T00:00:00, 2020-01-02T00:00:00, 2020-01-03T00:00:00]
+   * DateTime.of("2020-01-03 10:00:00").untilDate(DateTime.of("2020-01-01 10:00:00"))
+   *   // -> [2020-01-03T00:00:00, 2020-01-02T00:00:00, 2020-01-01T00:00:00]
+   * ```
+   */
+  untilDate(end: DateTime): DateTime[] {
+    let bd = this.midnight();
+    let ed = end.midnight();
+
+    if (bd.equals(ed)) {
+      return [bd, ed];
+    }
+
+    let dates = [bd];
+    const reverse = ed.isBefore(bd);
+    while (!bd.equals(ed)) {
+      bd = reverse ? bd.minusDays(1) : bd.plusDays(1);
+      dates.push(bd);
+    }
+
+    return dates;
+  }
+
+  /**
    * @param year
    *
    * @example
@@ -411,8 +440,6 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
-   * @param days
-   *
    * @example
    * ```typescript
    * DateTime.of("2020-01-01 10:00:00").endOfMonth()
