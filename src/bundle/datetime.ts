@@ -246,6 +246,17 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @example
+   * ```typescript
+   * DateTime.of("2020-01-01 10:01:02").midnight()
+   *   // -> 2020-01-01T00:00:00
+   * ```
+   */
+  midnight(): DateTime {
+    return new DateTime(this._value.hour(0).minute(0).second(0).millisecond(0));
+  }
+
+  /**
    * @param months
    *
    * @example
