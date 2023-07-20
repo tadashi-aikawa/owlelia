@@ -1,6 +1,6 @@
 {
   "name": "owlelia",
-  "version": "0.47.1",
+  "version": "0.47.2",
   "description": "TODO",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
