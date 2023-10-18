@@ -101,7 +101,6 @@ describe("DateTime", () => {
     test(`(${self}).toDate(${end}) = ${expected}`, () => {
       const actual = DateTime.of(self).toDate(DateTime.of(end));
       actual.forEach((a, i) => {
-        console.log(expected[i]);
         expect(a.rfc3339).toMatch(new RegExp(`^${expected[i]}.+`));
       });
     });
