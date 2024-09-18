@@ -12,17 +12,18 @@ tasks:
   install:
     desc: Install dependencies
     cmds:
-      - npm install
+      - corepack enable
+      - pnpm install
 
   build:
     desc: Build
     cmds:
-      - npm run build
+      - pnpm run build
 
   test:
     desc: Unit tests
     cmds:
-      - npm run test
+      - pnpm run test
 
   version-up:
     desc: |
@@ -35,7 +36,7 @@ tasks:
       - git fetch --all
       - git checkout master
       - git pull
-      - npm version {{.VERSION}}
+      - pnpm version {{.VERSION}}
       - git push
       - git push --tags
     preconditions:
@@ -43,12 +44,12 @@ tasks:
         msg: "VERSION is required."
 
   release:
-    desc: Packaging and uploading to npm
+    desc: Packaging and uploading to pnpm
     cmds:
       - task: install
       - task: build
       - task: test
-      - npm publish
+      - pnpm publish
     preconditions:
       - sh: "[ -z {{.VERSION}} ]"
         msg: "An unnecessary argument, VERSION is specified. Did you mean 'task version-up'?"
