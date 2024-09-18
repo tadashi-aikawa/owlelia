@@ -21,6 +21,12 @@ There are some sample codes which use _owlelia_ in `./sample`.
 
 ## For developers
 
+### Setup
+
+```bash
+git config core.hooksPath hooks
+```
+
 ### Requirements
 
 - Node.js >= 0.16
