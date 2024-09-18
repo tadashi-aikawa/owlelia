@@ -31,7 +31,7 @@ git config core.hooksPath hooks
 
 - Node.js >= 22
 - pnpm
-- TypeScript >= 4.1
+- TypeScript >= 5.6
 
 ### Develop
 
