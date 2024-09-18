@@ -29,7 +29,7 @@ git config core.hooksPath hooks
 
 ### Requirements
 
-- Node.js >= 0.16
+- Node.js >= 22
 - TypeScript >= 4.1
 
 ### Develop
