@@ -30,27 +30,17 @@ git config core.hooksPath hooks
 ### Requirements
 
 - Node.js >= 22
-- pnpm
 - TypeScript >= 5.6
 
 ### Develop
 
-Before, you need to install [Task].
-
 ```console
-task install
-task build
-task test
+pnpm install
+pnpm build
+pnpm test
 ```
 
 ### Release
 
-- [ ] Don't you need to add some exports to `index.ts`?
+> [!TODO]
 
-```
-task version-up VERSION=x.y.z
-```
-
-Then, GitHub Actions will automatically package and upload Owlelia.
-
-[task]: https://github.com/go-task/task

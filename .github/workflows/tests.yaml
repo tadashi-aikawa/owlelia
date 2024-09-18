@@ -20,18 +20,18 @@ jobs:
     name: Node ${{ matrix.node }}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: arduino/setup-task@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-
-      - run: task install
-      - run: task build
-      - run: task test
-      - uses: codecov/codecov-action@v3
+      - name: "Install -> Test -> Build"
+        # TODO: Biome移行後にlintを追加
+        run: |
+          corepack enable
+          pnpm install
+          pnpm test
+          pnpm build
+      - uses: codecov/codecov-action@v4
         if: "matrix.node == '22.x' && success()"
         with:
           file: ./coverage/clover.xml
