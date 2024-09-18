@@ -27,7 +27,7 @@ class Ok<T, E> {
   }
   biMap<TR, ER>(
     functor: (value: T) => TR,
-    errFunctor: (err: E) => ER
+    errFunctor: (err: E) => ER,
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
   }
@@ -80,7 +80,7 @@ class Err<T, E> {
   }
   biMap<TR, ER>(
     functor: (value: T) => TR,
-    errFunctor: (err: E) => ER
+    errFunctor: (err: E) => ER,
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
   }
@@ -111,7 +111,7 @@ export const err = <T, E>(error: E): Err<T, E> => new Err(error);
 export const ok = <T, E>(value: T): Ok<T, E> => new Ok(value);
 
 export function aggregate<T, E>(
-  results: Result<T, E | E[]>[]
+  results: Result<T, E | E[]>[],
 ): Result<T[], E[]> {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const errors = results.filter((x) => x.isErr()).flatMap((x) => x._err!);
@@ -122,7 +122,7 @@ export function aggregate<T, E>(
 }
 
 export async function fromPromise<T, E extends Error>(
-  promise: Promise<T>
+  promise: Promise<T>,
 ): AsyncResult<T, E> {
   try {
     return ok(await promise);

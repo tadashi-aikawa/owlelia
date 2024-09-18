@@ -16,7 +16,7 @@ export class LiquidValue<T, E = BaseError> {
   constructor(
     public value: Nullable<T>,
     public loading: boolean = false,
-    public error: Nullable<E> = null
+    public error: Nullable<E> = null,
   ) {
     this.initialValue = value;
   }
@@ -27,7 +27,7 @@ export class LiquidValue<T, E = BaseError> {
 
   async load(
     asyncFunc: () => AsyncResult<T, E>,
-    option?: LiquidValueLoadOption
+    option?: LiquidValueLoadOption,
   ): Promise<void> {
     if (option?.clearValueBeforeLoading) {
       this.value = this.initialValue;

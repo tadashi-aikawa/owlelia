@@ -71,7 +71,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   static of(value: string | Date | number): DateTime {
     return new DateTime(
-      dayjs(typeof value === "number" ? value * 1000 : value)
+      dayjs(typeof value === "number" ? value * 1000 : value),
     );
   }
 
@@ -466,7 +466,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
       this._value
         .year(date._value.year())
         .month(date._value.month())
-        .date(date._value.date())
+        .date(date._value.date()),
     );
   }
 
@@ -619,7 +619,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   between(
     begin: DateTime,
     end: DateTime,
-    option = { includeBegin: true, includeEnd: true, ignoreTime: false }
+    option = { includeBegin: true, includeEnd: true, ignoreTime: false },
   ): boolean {
     return (
       (option.includeBegin

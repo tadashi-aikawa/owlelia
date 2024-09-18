@@ -32,7 +32,7 @@ describe("Spot entity", () => {
 
   test("can created by listOf", () => {
     expect(actualList.map((x) => x.id)).toStrictEqual(
-      SpotId.listOf(["s1", "s2"])
+      SpotId.listOf(["s1", "s2"]),
     );
   });
 
@@ -60,14 +60,14 @@ describe("Spot entity", () => {
         Spot.of({
           id: SpotId.of("hoge"),
           name: "Spot1",
-        })
-      )
+        }),
+      ),
     ).toBeFalsy();
     expect(
       Spot.of({
         id: SpotId.of("hoge"),
         name: "Spot1",
-      }).equals(actual)
+      }).equals(actual),
     ).toBeFalsy();
 
     expect(actual.equals(undefined)).toBeFalsy;

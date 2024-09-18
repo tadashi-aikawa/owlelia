@@ -19,7 +19,7 @@ export abstract class AbstractValueObject<T> {
 }
 
 export abstract class ValueObject<
-  T extends ValueObjectProps
+  T extends ValueObjectProps,
 > extends AbstractValueObject<T> {}
 
 export abstract class PrimitiveValueObject<T> extends AbstractValueObject<T> {

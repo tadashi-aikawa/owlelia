@@ -48,7 +48,7 @@ describe("Result -> Ok", () => {
   test("transform value by biMap", () => {
     const actual = getResult({ value: 3 }).biMap(
       (x) => x * 2,
-      (err) => err.message
+      (err) => err.message,
     );
 
     expect(actual._ok).toBe(6);
@@ -58,7 +58,7 @@ describe("Result -> Ok", () => {
   test("transform value by fold", () => {
     const actual = getResult({ value: 3 }).fold(
       (x) => String(x * 2),
-      (err) => err.message
+      (err) => err.message,
     );
 
     expect(actual).toBe("6");
@@ -126,7 +126,7 @@ describe("Result -> Err", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getResult<number>({ error }).biMap(
       (x) => x * 2,
-      (err) => err.message
+      (err) => err.message,
     );
 
     expect(actual._err).toBe("失敗の理由: expected");
@@ -137,7 +137,7 @@ describe("Result -> Err", () => {
     const error = TestError.of({ invalidReason: "expected" });
     const actual = getResult<number>({ error }).fold(
       (x: number) => String(x * 2),
-      (err) => err.message
+      (err) => err.message,
     );
 
     expect(actual).toBe("失敗の理由: expected");
@@ -258,7 +258,7 @@ describe("fromPromise", () => {
   function asyncOperation(
     a: number,
     b: string,
-    occurError: boolean
+    occurError: boolean,
   ): Promise<string> {
     return occurError
       ? Promise.reject(new Error("Fail to asyncOperation"))

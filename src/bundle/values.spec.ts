@@ -6,7 +6,7 @@ function expectLiquidValue(
   v: LiquidValue<string>,
   value: string,
   loading: boolean,
-  errorMessage?: string
+  errorMessage?: string,
 ) {
   expect(v.value).toBe(value);
   expect(v.loading).toBe(loading);

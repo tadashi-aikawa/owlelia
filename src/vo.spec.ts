@@ -84,25 +84,25 @@ describe("Simple VO(Animal)", () => {
 
   test("equals the other", () => {
     expect(
-      actual.equals(Animal.of({ kind: "dog", name: "momochi" as AnimalName }))
+      actual.equals(Animal.of({ kind: "dog", name: "momochi" as AnimalName })),
     ).toBeTruthy();
     expect(
-      Animal.of({ kind: "dog", name: "momochi" as AnimalName }).equals(actual)
+      Animal.of({ kind: "dog", name: "momochi" as AnimalName }).equals(actual),
     ).toBeTruthy();
   });
 
   test("not equals others", () => {
     expect(
-      actual == Animal.of({ kind: "dog", name: "momochi" as AnimalName })
+      actual == Animal.of({ kind: "dog", name: "momochi" as AnimalName }),
     ).not.toBeTruthy();
     expect(
-      actual === Animal.of({ kind: "dog", name: "momochi" as AnimalName })
+      actual === Animal.of({ kind: "dog", name: "momochi" as AnimalName }),
     ).not.toBeTruthy();
     expect(
-      actual.equals(Animal.of({ kind: "cat", name: "momochi" as AnimalName }))
+      actual.equals(Animal.of({ kind: "cat", name: "momochi" as AnimalName })),
     ).not.toBeTruthy();
     expect(
-      actual.equals(Animal.of({ kind: "dog", name: "tatsuwo" as AnimalName }))
+      actual.equals(Animal.of({ kind: "dog", name: "tatsuwo" as AnimalName })),
     ).not.toBeTruthy();
   });
 
@@ -110,7 +110,7 @@ describe("Simple VO(Animal)", () => {
     expect(() => {
       actual.kind = "cow";
     }).toThrowError(
-      "Cannot assign to read only property 'kind' of object '#<Object>'"
+      "Cannot assign to read only property 'kind' of object '#<Object>'",
     );
   });
 });

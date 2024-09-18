@@ -28,7 +28,7 @@ describe("DateTime", () => {
   `("DateTime.from", ({ value, format, expected }) => {
     test(`DateTime.from(${value}, ${format}) = ${expected}`, () => {
       expect(DateTime.from(value, format).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -63,7 +63,7 @@ describe("DateTime", () => {
     test(`DateTime.yesterday()(now = ${now}) = ${expected}`, () => {
       MockDate.set(now);
       expect(DateTime.yesterday().rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -113,7 +113,7 @@ describe("DateTime", () => {
   `("replaceYear", ({ self, year, expected }) => {
     test(`(${self}).replaceYear(${year}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceYear(year).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -125,7 +125,7 @@ describe("DateTime", () => {
   `("replaceMonth", ({ self, month, expected }) => {
     test(`(${self}).replaceMonth(${month}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceMonth(month).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -137,7 +137,7 @@ describe("DateTime", () => {
   `("replaceDay", ({ self, day, expected }) => {
     test(`(${self}).replaceDay(${day}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceDay(day).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -149,7 +149,7 @@ describe("DateTime", () => {
   `("replaceHour", ({ self, hour, expected }) => {
     test(`(${self}).replaceHour(${hour}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceHour(hour).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -161,7 +161,7 @@ describe("DateTime", () => {
   `("replaceMinute", ({ self, minute, expected }) => {
     test(`(${self}).replaceMinute(${minute}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceMinute(minute).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -173,7 +173,7 @@ describe("DateTime", () => {
   `("replaceSecond", ({ self, second, expected }) => {
     test(`(${self}).replaceSecond(${second}) = ${expected}`, () => {
       expect(DateTime.of(self).replaceSecond(second).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -185,7 +185,7 @@ describe("DateTime", () => {
   `("midnight", ({ self, expected }) => {
     test(`(${self}).midnight() = ${expected}`, () => {
       expect(DateTime.of(self).midnight().rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -196,7 +196,7 @@ describe("DateTime", () => {
   `("plusMonths", ({ self, months, expected }) => {
     test(`(${self}).plusMonths(${months}) = ${expected}`, () => {
       expect(DateTime.of(self).plusMonths(months).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -207,7 +207,7 @@ describe("DateTime", () => {
   `("plusDays", ({ self, days, expected }) => {
     test(`(${self}).plusDays(${days}) = ${expected}`, () => {
       expect(DateTime.of(self).plusDays(days).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -219,7 +219,7 @@ describe("DateTime", () => {
   `("plusWeekdays", ({ self, days, expected }) => {
     test(`(${self}).plusWeekdays(${days}) = ${expected}`, () => {
       expect(DateTime.of(self).plusWeekdays(days).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -230,7 +230,7 @@ describe("DateTime", () => {
   `("plusHours", ({ self, hours, expected }) => {
     test(`(${self}).plusHours(${hours}) = ${expected}`, () => {
       expect(DateTime.of(self).plusHours(hours).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -241,7 +241,7 @@ describe("DateTime", () => {
   `("plusMinutes", ({ self, minutes, expected }) => {
     test(`(${self}).plusMinutes(${minutes}) = ${expected}`, () => {
       expect(DateTime.of(self).plusMinutes(minutes).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -252,7 +252,7 @@ describe("DateTime", () => {
   `("plusSeconds", ({ self, seconds, expected }) => {
     test(`(${self}).plusSeconds(${seconds}) = ${expected}`, () => {
       expect(DateTime.of(self).plusSeconds(seconds).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -263,7 +263,7 @@ describe("DateTime", () => {
   `("minusMonth", ({ self, months, expected }) => {
     test(`(${self}).minusMonth(${months}) = ${expected}`, () => {
       expect(DateTime.of(self).minusMonth(months).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -274,7 +274,7 @@ describe("DateTime", () => {
   `("minusDays", ({ self, days, expected }) => {
     test(`(${self}).minusDays(${days}) = ${expected}`, () => {
       expect(DateTime.of(self).minusDays(days).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -285,7 +285,7 @@ describe("DateTime", () => {
   `("minusHours", ({ self, hours, expected }) => {
     test(`(${self}).minusHours(${hours}) = ${expected}`, () => {
       expect(DateTime.of(self).minusHours(hours).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -296,7 +296,7 @@ describe("DateTime", () => {
   `("minusMinutes", ({ self, minutes, expected }) => {
     test(`(${self}).minusMinutes(${minutes}) = ${expected}`, () => {
       expect(DateTime.of(self).minusMinutes(minutes).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -307,7 +307,7 @@ describe("DateTime", () => {
   `("minusSeconds", ({ self, seconds, expected }) => {
     test(`(${self}).minusSeconds(${seconds}) = ${expected}`, () => {
       expect(DateTime.of(self).minusSeconds(seconds).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -320,7 +320,7 @@ describe("DateTime", () => {
   `("endOfMonth", ({ self, expected }) => {
     test(`(${self}).endOfMonth() = ${expected}`, () => {
       expect(DateTime.of(self).endOfMonth().rfc3339).toMatch(
-        new RegExp(`^${expected}.+`)
+        new RegExp(`^${expected}.+`),
       );
     });
   });
@@ -331,7 +331,7 @@ describe("DateTime", () => {
   `("overwriteDate", ({ self, date, expected }) => {
     test(`(${self}).overwriteDate(${date}) = ${expected}`, () => {
       expect(
-        DateTime.of(self).overwriteDate(DateTime.of(date)).rfc3339
+        DateTime.of(self).overwriteDate(DateTime.of(date)).rfc3339,
       ).toMatch(new RegExp(`^${expected}.+`));
     });
   });
@@ -450,7 +450,7 @@ describe("DateTime", () => {
   `("equals", ({ self, dateTime, ignoreTime, expected }) => {
     test(`(${self}).equals(${dateTime}, ${ignoreTime}) = ${expected}`, () => {
       expect(DateTime.of(self).equals(DateTime.of(dateTime), ignoreTime)).toBe(
-        expected
+        expected,
       );
     });
   });
@@ -470,7 +470,7 @@ describe("DateTime", () => {
   `("isAfter", ({ self, dateTime, ignoreTime, expected }) => {
     test(`(${self}).isAfter(${dateTime}, ${ignoreTime}) = ${expected}`, () => {
       expect(DateTime.of(self).isAfter(DateTime.of(dateTime), ignoreTime)).toBe(
-        expected
+        expected,
       );
     });
   });
@@ -490,7 +490,7 @@ describe("DateTime", () => {
   `("isBefore", ({ self, dateTime, ignoreTime, expected }) => {
     test(`(${self}).isBefore(${dateTime}, ${ignoreTime}) = ${expected}`, () => {
       expect(
-        DateTime.of(self).isBefore(DateTime.of(dateTime), ignoreTime)
+        DateTime.of(self).isBefore(DateTime.of(dateTime), ignoreTime),
       ).toBe(expected);
     });
   });
@@ -510,7 +510,7 @@ describe("DateTime", () => {
   `("isAfterOrEquals", ({ self, dateTime, ignoreTime, expected }) => {
     test(`(${self}).isAfterOrEquals(${dateTime}, ${ignoreTime}) = ${expected}`, () => {
       expect(
-        DateTime.of(self).isAfterOrEquals(DateTime.of(dateTime), ignoreTime)
+        DateTime.of(self).isAfterOrEquals(DateTime.of(dateTime), ignoreTime),
       ).toBe(expected);
     });
   });
@@ -530,7 +530,7 @@ describe("DateTime", () => {
   `("isBeforeOrEquals", ({ self, dateTime, ignoreTime, expected }) => {
     test(`(${self}).isBeforeOrEquals(${dateTime}, ${ignoreTime}) = ${expected}`, () => {
       expect(
-        DateTime.of(self).isBeforeOrEquals(DateTime.of(dateTime), ignoreTime)
+        DateTime.of(self).isBeforeOrEquals(DateTime.of(dateTime), ignoreTime),
       ).toBe(expected);
     });
   });
@@ -568,10 +568,10 @@ describe("DateTime", () => {
             includeBegin,
             includeEnd,
             ignoreTime,
-          })
+          }),
         ).toBe(expected);
       });
-    }
+    },
   );
 
   describe.each`
