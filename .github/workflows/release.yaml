@@ -1,28 +1,28 @@
 name: "Release"
-
-on:
-  push:
-    tags:
-      - v*
+on: workflow_dispatch
+permissions:
+  contents: write
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: arduino/setup-task@v1
+      - uses: actions/checkout@v4
+      - name: "Build"
+        run: |
+          corepack enable
+          pnpm install
+          pnpm test
+          pnpm build
+      - name: "Prepare release"
+        run: npm i -D --no-save conventional-changelog-conventionalcommits
+      - name: "Release"
+        uses: cycjimmy/semantic-release-action@v4
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "22"
-          registry-url: "https://registry.npmjs.org"
-
-      - name: Release
-        run: task release
+          semantic_version: 24.1.1
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: "Discord notification (not success)"
         uses: rjstone/discord-webhook-notify@v1
         if: "! success()"
