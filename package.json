@@ -4,23 +4,19 @@
   "description": "TODO",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "dev": "tsc && node .",
     "build": "tsc",
     "test": "jest",
     "test-watch": "jest --watch",
-    "lint": "biome src"
+    "lint": "biome format src && biome lint src"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tadashi-aikawa/owlelia.git"
   },
-  "keywords": [
-    "DDD"
-  ],
+  "keywords": ["DDD"],
   "author": "tadashi-aikawa",
   "license": "MIT",
   "bugs": {
