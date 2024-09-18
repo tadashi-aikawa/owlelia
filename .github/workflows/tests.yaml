@@ -25,10 +25,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: "Install -> Test -> Build"
-        # TODO: Biome移行後にlintを追加
         run: |
           corepack enable
           pnpm install
+          pnpm lint
           pnpm test
           pnpm build
       - uses: codecov/codecov-action@v4
