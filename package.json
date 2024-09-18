@@ -4,7 +4,9 @@
   "description": "TODO",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsc && node .",
     "build": "tsc",
@@ -16,7 +18,9 @@
     "type": "git",
     "url": "git+https://github.com/tadashi-aikawa/owlelia.git"
   },
-  "keywords": ["DDD"],
+  "keywords": [
+    "DDD"
+  ],
   "author": "tadashi-aikawa",
   "license": "MIT",
   "bugs": {
@@ -25,8 +29,8 @@
   "homepage": "https://github.com/tadashi-aikawa/owlelia#readme",
   "devDependencies": {
     "@babel/core": "^7.25.2",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-transform-class-properties": "^7.25.4",
+    "@babel/plugin-transform-private-methods": "^7.25.4",
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-typescript": "^7.24.7",
     "@biomejs/biome": "^1.9.1",
