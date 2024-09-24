@@ -113,9 +113,9 @@ export const ok = <T, E>(value: T): Ok<T, E> => new Ok(value);
 export function aggregate<T, E>(
   results: Result<T, E | E[]>[],
 ): Result<T[], E[]> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // biome-ignore lint/style/noNonNullAssertion:
   const errors = results.filter((x) => x.isErr()).flatMap((x) => x._err!);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // biome-ignore lint/style/noNonNullAssertion:
   const values = results.filter((x) => x.isOk()).map((x) => x._ok!);
 
   return errors.length > 0 ? err(errors) : ok(values);

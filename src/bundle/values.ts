@@ -1,5 +1,5 @@
-import { AsyncResult, Nullable } from "../result";
-import { BaseError } from "../error";
+import type { BaseError } from "../error";
+import type { AsyncResult, Nullable } from "../result";
 import { isEmpty } from "./utils";
 
 interface LiquidValueLoadOption {
@@ -15,7 +15,7 @@ export class LiquidValue<T, E = BaseError> {
 
   constructor(
     public value: Nullable<T>,
-    public loading: boolean = false,
+    public loading = false,
     public error: Nullable<E> = null,
   ) {
     this.initialValue = value;

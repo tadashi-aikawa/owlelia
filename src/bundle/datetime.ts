@@ -1,5 +1,5 @@
-import { ValueObject } from "../vo";
 import dayjs from "dayjs";
+import { ValueObject } from "../vo";
 import "dayjs/locale/ja";
 
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -45,8 +45,11 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   static setHolidays(...dates: string[]): void {
-    this.holidays = dates.map(DateTime.of);
-    this.holidayByDisplayDate = keyBy(this.holidays, (x) => x.displayDate);
+    DateTime.holidays = dates.map(DateTime.of);
+    DateTime.holidayByDisplayDate = keyBy(
+      DateTime.holidays,
+      (x) => x.displayDate,
+    );
   }
 
   /**
@@ -180,13 +183,13 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   toDate(end: DateTime): DateTime[] {
     let bd = this.midnight();
-    let ed = end.midnight();
+    const ed = end.midnight();
 
     if (bd.equals(ed)) {
       return [bd, ed];
     }
 
-    let dates = [bd];
+    const dates = [bd];
     const reverse = ed.isBefore(bd);
     while (!bd.equals(ed)) {
       bd = reverse ? bd.minusDays(1) : bd.plusDays(1);
@@ -326,10 +329,12 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   plusWeekdays(weekdays: number): DateTime {
     let d = this.clone();
-    while (weekdays > 0) {
+    let days = weekdays;
+
+    while (days > 0) {
       d = d.plusDays(1);
       if (d.isWeekday) {
-        weekdays--;
+        days--;
       }
     }
     return d;

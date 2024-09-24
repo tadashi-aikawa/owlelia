@@ -1,6 +1,6 @@
 import {
   InvalidSpotIdError,
-  SampleError,
+  type SampleError,
   UnexpectedError,
 } from "../sample/error/SampleError";
 

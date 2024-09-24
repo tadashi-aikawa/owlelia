@@ -1,8 +1,8 @@
-import { SpotId } from "../sample/vo/SpotId";
 import { Animal } from "../sample/vo/Animal";
-import { CoordinatePair } from "../sample/vo/CoordinatePair";
+import type { AnimalName } from "../sample/vo/AnimalName";
 import { Coordinate } from "../sample/vo/Coordinate";
-import { AnimalName } from "../sample/vo/AnimalName";
+import { CoordinatePair } from "../sample/vo/CoordinatePair";
+import { SpotId } from "../sample/vo/SpotId";
 
 describe("Primitive VO(SpotId)", () => {
   let actual: SpotId;
@@ -32,12 +32,14 @@ describe("Primitive VO(SpotId)", () => {
 
   test("not equals others", () => {
     const sameValue = SpotId.of("100");
+    // biome-ignore lint/suspicious/noDoubleEquals: Use for intented test
     expect(actual == sameValue).toBeFalsy();
     expect(actual === sameValue).toBeFalsy();
     expect(actual.equals(SpotId.of("101"))).toBeFalsy();
     expect(actual.equals(undefined)).toBeFalsy();
 
     const sameValueList = SpotId.listOf(["100", "200"]);
+    // biome-ignore lint/suspicious/noDoubleEquals: Use for intented test
     expect(actualList == sameValueList).toBeFalsy();
     expect(actualList === sameValueList).toBeFalsy();
   });
@@ -93,6 +95,7 @@ describe("Simple VO(Animal)", () => {
 
   test("not equals others", () => {
     expect(
+      // biome-ignore lint/suspicious/noDoubleEquals: Use for intented test
       actual == Animal.of({ kind: "dog", name: "momochi" as AnimalName }),
     ).not.toBeTruthy();
     expect(
@@ -145,6 +148,7 @@ describe("VO in VO(CoordinatePair)", () => {
       other: Coordinate.of({ lat: 36, lon: 136 }),
     });
 
+    // biome-ignore lint/suspicious/noDoubleEquals: Use for intented test
     expect(actual == sameValue).not.toBeTruthy();
     expect(actual === sameValue).not.toBeTruthy();
   });

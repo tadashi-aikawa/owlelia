@@ -1,7 +1,7 @@
-import { aggregate, Result, err, ok, fromPromise } from "./result";
 import { BaseError } from "./error";
+import { type Result, aggregate, err, fromPromise, ok } from "./result";
 
-export class TestError extends BaseError {
+class TestError extends BaseError {
   code = "TEST_ERROR";
   name = "テスト確認用エラー";
 
@@ -18,7 +18,7 @@ function getResult<T, E = TestError>(args: {
   value?: T;
   error?: E;
 }): Result<T, E> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // biome-ignore lint/style/noNonNullAssertion:
   return args.error ? err(args.error) : ok(args.value!);
 }
 
@@ -28,7 +28,7 @@ describe("Result -> Ok", () => {
 
     expect(actual.isOk()).toBeTruthy();
     expect(actual.isErr()).toBeFalsy();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion:
     expect(actual._ok!).toBe("hoge");
     expect(actual._err).toBeUndefined();
   });
@@ -99,9 +99,9 @@ describe("Result -> Err", () => {
 
     expect(actual.isErr()).toBeTruthy();
     expect(actual.isOk()).toBeFalsy();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion:
     expect(actual._err!.code).toBe("TEST_ERROR");
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // biome-ignore lint/style/noNonNullAssertion:
     expect(actual._err!.message).toBe("失敗の理由: expected");
     expect(actual._ok).toBeUndefined();
   });
@@ -161,6 +161,7 @@ describe("Result -> Err", () => {
     }).unwrap();
 
     expect(actual).toBeUndefined();
+    // biome-ignore lint/style/noNonNullAssertion:
     expect(error!.message).toBe("失敗の理由: expected");
   });
 
@@ -262,7 +263,7 @@ describe("fromPromise", () => {
   ): Promise<string> {
     return occurError
       ? Promise.reject(new Error("Fail to asyncOperation"))
-      : Promise.resolve(`Success to asyncOperation`);
+      : Promise.resolve("Success to asyncOperation");
   }
 
   test("returns Ok if resolved", async () => {

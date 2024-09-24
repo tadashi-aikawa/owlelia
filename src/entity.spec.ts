@@ -52,6 +52,7 @@ describe("Spot entity", () => {
       name: "Spot1",
     });
 
+    // biome-ignore lint/suspicious/noDoubleEquals: Use for intented test
     expect(actual == sameIdentity).toBeFalsy();
     expect(actual === sameIdentity).toBeFalsy();
 

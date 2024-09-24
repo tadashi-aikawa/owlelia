@@ -31,6 +31,7 @@ export function round(n: number, decimalPlace: number): number {
  */
 export function isEmpty(arg: any): boolean {
   return (
+    // biome-ignore lint/complexity/useOptionalChain: args?.constructorにすると実装が変わってしまう
     [Object, Array].includes((arg || {}).constructor) &&
     !Object.entries(arg || {}).length
   );
