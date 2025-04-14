@@ -1,7 +1,24 @@
-import { DateTime } from "./datetime";
 import MockDate from "mockdate";
+import { DateTime, toHHmmss } from "./datetime";
 
 DateTime.setHolidays("2020-07-07", "2020-12-02", "2020-12-24");
+
+describe("toHHmmss", () => {
+  describe.each`
+    seconds  | expected
+    ${0}     | ${"00:00:00"}
+    ${1}     | ${"00:00:01"}
+    ${60}    | ${"00:01:00"}
+    ${131}   | ${"00:02:11"}
+    ${3600}  | ${"01:00:00"}
+    ${86400} | ${"24:00:00"}
+    ${86401} | ${"24:00:01"}
+  `("toHHmmss", ({ seconds, expected }) => {
+    test(`toHHmmss(${seconds}) = ${expected}`, () => {
+      expect(toHHmmss(seconds)).toBe(expected);
+    });
+  });
+});
 
 describe("DateTime", () => {
   describe.each`

@@ -21,7 +21,7 @@ function keyBy<T>(xs: T[], toKey: (x: T) => string): { [key: string]: T } {
  *   131 -> 00:02:11
  * @param seconds
  */
-function toHHmmss(seconds: number): string {
+export function toHHmmss(seconds: number): string {
   const hour = (seconds / (60 * 60)) | 0;
   const min = ((seconds % (60 * 60)) / 60) | 0;
   const sec = seconds % 60;
