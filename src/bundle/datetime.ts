@@ -28,6 +28,25 @@ export function toHHmmss(seconds: number): string {
   return `${pad00(hour)}:${pad00(min)}:${pad00(sec)}`;
 }
 
+/**
+ * seconds -> hh時mm分 or ss秒
+ * ex:
+ *   - 131 -> 2分11秒
+ *   - 3601 -> 1時間0分
+ */
+export function sec2Japanese(seconds: number): string {
+  const hour = (seconds / (60 * 60)) | 0;
+  const min = ((seconds % (60 * 60)) / 60) | 0;
+  const sec = seconds % 60;
+  return [
+    hour && `${hour}時間`,
+    min && `${min}分`,
+    hour === 0 && min === 0 && `${sec}秒`,
+  ]
+    .filter((x) => x)
+    .join("");
+}
+
 export class DateTime extends ValueObject<dayjs.Dayjs> {
   private _owleliaVoCommonDateTimeBrand!: never;
 

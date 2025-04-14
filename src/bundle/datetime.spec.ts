@@ -1,5 +1,5 @@
 import MockDate from "mockdate";
-import { DateTime, toHHmmss } from "./datetime";
+import { DateTime, sec2Japanese, toHHmmss } from "./datetime";
 
 DateTime.setHolidays("2020-07-07", "2020-12-02", "2020-12-24");
 
@@ -16,6 +16,25 @@ describe("toHHmmss", () => {
   `("toHHmmss", ({ seconds, expected }) => {
     test(`toHHmmss(${seconds}) = ${expected}`, () => {
       expect(toHHmmss(seconds)).toBe(expected);
+    });
+  });
+});
+
+describe("sec2Japanese", () => {
+  describe.each`
+    seconds | expected
+    ${0}    | ${"0秒"}
+    ${1}    | ${"1秒"}
+    ${59}   | ${"59秒"}
+    ${60}   | ${"1分"}
+    ${61}   | ${"1分"}
+    ${120}  | ${"2分"}
+    ${3600} | ${"1時間"}
+    ${3601} | ${"1時間"}
+    ${3661} | ${"1時間1分"}
+  `("sec2Japanese", ({ seconds, expected }) => {
+    test(`sec2Japanese(${seconds}) = ${expected}`, () => {
+      expect(sec2Japanese(seconds)).toBe(expected);
     });
   });
 });
