@@ -11,7 +11,7 @@ Utility for DDD 🦉
 
 ## Install
 
-```console
+```bash
 npm i owlelia
 ```
 
@@ -34,7 +34,7 @@ git config core.hooksPath hooks
 
 ### Develop
 
-```console
+```bash
 pnpm install
 pnpm build
 pnpm test
