@@ -920,6 +920,16 @@ describe("DateTime", () => {
 
   describe.each`
     self                     | expected
+    ${"2020-01-01 00:01:30"} | ${"2020/01/01"}
+    ${"2020-10-10 13:10:00"} | ${"2020/10/10"}
+  `("yyyyMMddSlash", ({ self, expected }) => {
+    test(`(${self}).yyyyMMddSlash = ${expected}`, () => {
+      expect(DateTime.of(self).yyyyMMddSlash).toBe(expected);
+    });
+  });
+
+  describe.each`
+    self                     | expected
     ${"2020-01-01 00:01:30"} | ${"20200101000130"}
     ${"2020-10-10 13:10:00"} | ${"20201010131000"}
   `("yyyyMMddHHmmss", ({ self, expected }) => {

@@ -992,6 +992,13 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * ex: 2020-10-02 08:23:01 -> 2020/10/02
+   */
+  get yyyyMMddSlash(): string {
+    return this._value.format("YYYY/MM/DD");
+  }
+
+  /**
    * ex: 2020-10-02 08:23:01 -> 20201002082301
    */
   get yyyyMMddHHmmss(): string {
