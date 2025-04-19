@@ -593,6 +593,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
   }
 
   /**
+   * @deprecated Use `sec2Japanese` instead.
    * ex
    *   00:00:48 -> 48秒
    *   00:02:11 -> 2分 (Ignore seconds in the case seconds >= 60)
