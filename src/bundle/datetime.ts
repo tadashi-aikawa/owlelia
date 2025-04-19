@@ -101,17 +101,20 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * Create instance from specific formats.
    * @param value
    * @param format [Available format](https://day.js.org/docs/en/parse/string-format#list-of-all-available-parsing-tokens)
+   * @returns undefined if the format or date is invalid
    *
    * @example
    * ```typescript
-   * DateTime.of("02-02-2020", "MM-DD-YYYY")
+   * DateTime.from("02-02-2020", "MM-DD-YYYY")
    *   // -> 2020-02-02T00:00:00
-   * DateTime.of("2020-02-02")
-   *   // -> 2020-02-02T00:00:00
+   * DateTime.from("2021-02-29", "YYYY-MM-DD")
+   *   // -> undefined
    * ```
    */
-  static from(value: string, format?: string): DateTime {
-    return new DateTime(dayjs(value, format));
+  static from(value: string, format: string): DateTime | undefined {
+    return DateTime.isValid(value, format)
+      ? new DateTime(dayjs(value, format))
+      : undefined;
   }
 
   /**

@@ -61,12 +61,16 @@ describe("DateTime", () => {
     ${"2020-02-02"} | ${"YYYY-MM-DD"} | ${"2020-02-02T00:00:00"}
     ${"02-02-2020"} | ${"MM-DD-YYYY"} | ${"2020-02-02T00:00:00"}
     ${"20_02_02"}   | ${"YY_MM_DD"}   | ${"2020-02-02T00:00:00"}
-    ${"2020/02/02"} | ${undefined}    | ${"2020-02-02T00:00:00"}
+    ${"2020-02-29"} | ${"YYYY-MM-DD"} | ${"2020-02-29T00:00:00"}
+    ${"2021-02-29"} | ${"YYYY-MM-DD"} | ${undefined}
   `("DateTime.from", ({ value, format, expected }) => {
     test(`DateTime.from(${value}, ${format}) = ${expected}`, () => {
-      expect(DateTime.from(value, format).rfc3339).toMatch(
-        new RegExp(`^${expected}.+`),
-      );
+      const actual = DateTime.from(value, format);
+      if (actual) {
+        expect(actual.rfc3339).toMatch(new RegExp(`^${expected}.+`));
+      } else {
+        expect(actual).toBe(expected);
+      }
     });
   });
 
