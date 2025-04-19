@@ -87,7 +87,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    *   // -> 2020-02-02T20:20:20
    * DateTime.of(new Date(2020, 0, 1, 0, 1, 30, 0))
    *   // -> 2020-01-01T00:01:30
-   * DateTime.of(1633579856)
+   * DateTime.of(1633584227)
    *   // -> 2021-10-07T14:23:47
    * ```
    */
