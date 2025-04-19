@@ -42,5 +42,5 @@ pnpm test
 
 ### Release
 
-> [!TODO]
+Run [Release Action](https://github.com/tadashi-aikawa/owlelia/actions/workflows/release.yaml) manually.
 
