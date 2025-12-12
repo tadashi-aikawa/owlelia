@@ -26,7 +26,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: "Install -> Test -> Build"
         run: |
-          corepack enable
+          npm i -g pnpm@10.25
           pnpm install
           pnpm lint
           pnpm test
