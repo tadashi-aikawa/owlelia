@@ -12,8 +12,7 @@ jobs:
         run: |
           npm i -g pnpm@10.25
           pnpm install
-          pnpm lint
-          pnpm test
+          pnpm pre:push
           pnpm build
       - name: "Prepare release"
         run: pnpm add -D conventional-changelog-conventionalcommits

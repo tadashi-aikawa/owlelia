@@ -28,8 +28,7 @@ jobs:
         run: |
           npm i -g pnpm@10.25
           pnpm install
-          pnpm lint
-          pnpm test
+          pnpm pre:push
           pnpm build
       - uses: codecov/codecov-action@v4
         if: "matrix.node == '22.x' && success()"

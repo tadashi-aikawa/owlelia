@@ -12,6 +12,8 @@
     "build": "tsc",
     "test": "jest",
     "test-watch": "jest --watch",
+    "typecheck": "tsc --noEmit",
+    "pre:push": "pnpm typecheck && pnpm run lint && pnpm test",
     "lint": "biome format src && biome lint src"
   },
   "repository": {
