@@ -19,8 +19,8 @@ fi
 # 特定ディレクトリ配下に変更がある場合のみ実行. 常に実行ならif文は不要
 if git diff --name-only "${from}".."${branch}" | grep -Eq "^src/"; then
   echo ":frog: Check src"
-  if cd src && ! pnpm test; then
-    echo "Linting failed. Aborting push."
+  if pnpm pre:push; then
+    echo "Failed. Aborting push."
     exit 1
   fi
 fi
