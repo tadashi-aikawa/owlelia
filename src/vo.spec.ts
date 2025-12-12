@@ -112,7 +112,7 @@ describe("Simple VO(Animal)", () => {
   test("is immutable", () => {
     expect(() => {
       actual.kind = "cow";
-    }).toThrowError(
+    }).toThrow(
       "Cannot assign to read only property 'kind' of object '#<Object>'",
     );
   });

@@ -26,21 +26,21 @@
   },
   "homepage": "https://github.com/tadashi-aikawa/owlelia#readme",
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/plugin-transform-class-properties": "^7.25.4",
-    "@babel/plugin-transform-private-methods": "^7.25.4",
-    "@babel/preset-env": "^7.25.4",
-    "@babel/preset-typescript": "^7.24.7",
-    "@biomejs/biome": "^1.9.1",
-    "@types/jest": "^29.5.13",
-    "babel-jest": "^29.7.0",
-    "conventional-changelog-conventionalcommits": "^8.0.0",
-    "jest": "^29.7.0",
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-class-properties": "^7.27.1",
+    "@babel/plugin-transform-private-methods": "^7.27.1",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-typescript": "^7.28.5",
+    "@biomejs/biome": "^2.3.8",
+    "@types/jest": "^30.0.0",
+    "babel-jest": "^30.2.0",
+    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "jest": "^30.2.0",
     "mockdate": "^3.0.5",
-    "typescript": "^5.6.2"
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.19"
   },
   "pnpm": {
     "overrides": {

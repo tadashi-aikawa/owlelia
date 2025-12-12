@@ -1,5 +1,5 @@
 import { BaseError } from "./error";
-import { type Result, aggregate, err, fromPromise, ok } from "./result";
+import { aggregate, err, fromPromise, ok, type Result } from "./result";
 
 class TestError extends BaseError {
   code = "TEST_ERROR";
@@ -18,7 +18,7 @@ function getResult<T, E = TestError>(args: {
   value?: T;
   error?: E;
 }): Result<T, E> {
-  // biome-ignore lint/style/noNonNullAssertion:
+  // biome-ignore lint/style/noNonNullAssertion: no problem in test code
   return args.error ? err(args.error) : ok(args.value!);
 }
 
@@ -28,7 +28,7 @@ describe("Result -> Ok", () => {
 
     expect(actual.isOk()).toBeTruthy();
     expect(actual.isErr()).toBeFalsy();
-    // biome-ignore lint/style/noNonNullAssertion:
+    // biome-ignore lint/style/noNonNullAssertion: no problem in test code
     expect(actual._ok!).toBe("hoge");
     expect(actual._err).toBeUndefined();
   });
@@ -99,9 +99,9 @@ describe("Result -> Err", () => {
 
     expect(actual.isErr()).toBeTruthy();
     expect(actual.isOk()).toBeFalsy();
-    // biome-ignore lint/style/noNonNullAssertion:
+    // biome-ignore lint/style/noNonNullAssertion: no problem in test code
     expect(actual._err!.code).toBe("TEST_ERROR");
-    // biome-ignore lint/style/noNonNullAssertion:
+    // biome-ignore lint/style/noNonNullAssertion: no problem in test code
     expect(actual._err!.message).toBe("失敗の理由: expected");
     expect(actual._ok).toBeUndefined();
   });
@@ -161,7 +161,7 @@ describe("Result -> Err", () => {
     }).unwrap();
 
     expect(actual).toBeUndefined();
-    // biome-ignore lint/style/noNonNullAssertion:
+    // biome-ignore lint/style/noNonNullAssertion: no problem in test code
     expect(error!.message).toBe("失敗の理由: expected");
   });
 
@@ -257,8 +257,8 @@ describe("aggregate", () => {
 describe("fromPromise", () => {
   // noinspection NestedFunctionJS
   function asyncOperation(
-    a: number,
-    b: string,
+    _a: number,
+    _b: string,
     occurError: boolean,
   ): Promise<string> {
     return occurError

@@ -3,6 +3,7 @@ import { ValueObject } from "../vo";
 import "dayjs/locale/ja";
 
 import customParseFormat from "dayjs/plugin/customParseFormat";
+
 dayjs.extend(customParseFormat);
 
 const pad00 = (v: number): string => String(v).padStart(2, "0");
@@ -48,6 +49,9 @@ export function sec2Japanese(seconds: number): string {
 }
 
 export class DateTime extends ValueObject<dayjs.Dayjs> {
+  // biome-ignore lint/suspicious/noTsIgnore: need to suppress error
+  // @ts-ignore: unused private member
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: need to infer type
   private _owleliaVoCommonDateTimeBrand!: never;
 
   private static holidays: DateTime[];

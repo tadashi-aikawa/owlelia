@@ -1,5 +1,5 @@
 class Ok<T, E> {
-  // noinspection JSUnusedLocalSymbols
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: need to infer type
   private _type = "ok" as const;
   constructor(public value: T) {}
 
@@ -35,7 +35,7 @@ class Ok<T, E> {
     return functor(this.value);
   }
 
-  // noinspection JSUnusedLocalSymbols
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: need to match signature
   or(value: T): T {
     return this.value;
   }
@@ -51,7 +51,7 @@ class Ok<T, E> {
 }
 
 class Err<T, E> {
-  // noinspection JSUnusedLocalSymbols
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: need to infer type
   private _type = "err" as const;
   constructor(public error: E) {}
 
@@ -74,7 +74,7 @@ class Err<T, E> {
   mapErr<ER>(functor: (err: E) => ER): Result<T, ER> {
     return new Err(functor(this.error));
   }
-  // noinspection JSUnusedLocalSymbols
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: need to match signature
   map<TR>(functor: (value: T) => TR): Result<TR, E> {
     return new Err(this.error);
   }
@@ -84,6 +84,7 @@ class Err<T, E> {
   ): Result<TR, ER> {
     return this.mapErr(errFunctor).map(functor);
   }
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: need to match signature
   fold<U>(functor: (value: T) => U, errFunctor: (err: E) => U): U {
     return errFunctor(this.error);
   }
@@ -113,9 +114,9 @@ export const ok = <T, E>(value: T): Ok<T, E> => new Ok(value);
 export function aggregate<T, E>(
   results: Result<T, E | E[]>[],
 ): Result<T[], E[]> {
-  // biome-ignore lint/style/noNonNullAssertion:
+  // biome-ignore lint/style/noNonNullAssertion: no problem here
   const errors = results.filter((x) => x.isErr()).flatMap((x) => x._err!);
-  // biome-ignore lint/style/noNonNullAssertion:
+  // biome-ignore lint/style/noNonNullAssertion: no problem here
   const values = results.filter((x) => x.isOk()).map((x) => x._ok!);
 
   return errors.length > 0 ? err(errors) : ok(values);
