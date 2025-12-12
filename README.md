@@ -31,11 +31,12 @@ git config core.hooksPath hooks
 
 - Node.js >= 22
 - TypeScript >= 5.6
+- pnpm >= 10.25
 
 ### Develop
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm build
 pnpm test
 ```
