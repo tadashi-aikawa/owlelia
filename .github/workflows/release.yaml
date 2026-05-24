@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: "Build"
         run: |
-          npm i -g pnpm@10.25
+          npm i -g pnpm@11.0.8
           pnpm install
           pnpm pre:push
           pnpm build
