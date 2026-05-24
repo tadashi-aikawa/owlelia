@@ -33,7 +33,7 @@
     "@babel/core": "^7.28.5",
     "@babel/plugin-transform-class-properties": "^7.27.1",
     "@babel/plugin-transform-private-methods": "^7.27.1",
-    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-env": "^7.29.5",
     "@babel/preset-typescript": "^7.28.5",
     "@biomejs/biome": "^2.3.8",
     "@types/jest": "^30.0.0",
