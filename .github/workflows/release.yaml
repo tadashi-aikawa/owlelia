@@ -18,8 +18,8 @@ jobs:
       - name: "Prepare release"
         run: pnpm add -D conventional-changelog-conventionalcommits
       - name: "Release"
-        uses: cycjimmy/semantic-release-action@v5
+        uses: cycjimmy/semantic-release-action@v6
         with:
-          semantic_version: 24.1.1
+          semantic_version: 25.0.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
