@@ -7,7 +7,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: "Build"
         run: |
           npm i -g pnpm@10.25
@@ -17,7 +17,7 @@ jobs:
       - name: "Prepare release"
         run: pnpm add -D conventional-changelog-conventionalcommits
       - name: "Release"
-        uses: cycjimmy/semantic-release-action@v4
+        uses: cycjimmy/semantic-release-action@v5
         with:
           semantic_version: 24.1.1
         env:
