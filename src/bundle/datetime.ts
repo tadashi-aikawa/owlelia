@@ -16,6 +16,8 @@ function keyBy<T>(xs: T[], toKey: (x: T) => string): { [key: string]: T } {
   return result;
 }
 
+export type DateTimeLocale = "en" | "ja";
+
 /**
  * seconds -> HH:mm:ss
  * ex
@@ -56,6 +58,49 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
 
   private static holidays: DateTime[];
   private static holidayByDisplayDate: { [date: string]: DateTime };
+  private static localeName: DateTimeLocale | undefined;
+
+  private static dayjs(
+    value?: string | Date | number,
+    format?: string,
+  ): dayjs.Dayjs {
+    if (format && typeof value === "string") {
+      return DateTime.localeName
+        ? dayjs(value, format, DateTime.localeName)
+        : dayjs(value, format);
+    }
+
+    const d = dayjs(value);
+    return DateTime.localeName ? d.locale(DateTime.localeName) : d;
+  }
+
+  /**
+   * Set default locale for parsing and formatting.
+   * @param locale Supported locale name.
+   *
+   * @example
+   * ```typescript
+   * DateTime.setLocale("ja")
+   * DateTime.from("2026-05-27(水)", "YYYY-MM-DD(ddd)")
+   * ```
+   */
+  static setLocale(locale: DateTimeLocale | undefined): void {
+    DateTime.localeName = locale;
+  }
+
+  /**
+   * Get default locale.
+   */
+  static getLocale(): DateTimeLocale | undefined {
+    return DateTime.localeName;
+  }
+
+  /**
+   * Reset default locale.
+   */
+  static resetLocale(): void {
+    DateTime.localeName = undefined;
+  }
 
   /**
    * Set specific holidays.
@@ -97,7 +142,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   static of(value: string | Date | number): DateTime {
     return new DateTime(
-      dayjs(typeof value === "number" ? value * 1000 : value),
+      DateTime.dayjs(typeof value === "number" ? value * 1000 : value),
     );
   }
 
@@ -117,7 +162,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    */
   static from(value: string, format: string): DateTime | undefined {
     return DateTime.isValid(value, format)
-      ? new DateTime(dayjs(value, format))
+      ? new DateTime(DateTime.dayjs(value, format))
       : undefined;
   }
 
@@ -125,7 +170,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * Create instance of now.
    */
   static now(): DateTime {
-    return new DateTime(dayjs());
+    return new DateTime(DateTime.dayjs());
   }
 
   /**
@@ -139,7 +184,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   static today(): DateTime {
-    return new DateTime(dayjs().startOf("day"));
+    return new DateTime(DateTime.dayjs().startOf("day"));
   }
 
   /**
@@ -186,7 +231,7 @@ export class DateTime extends ValueObject<dayjs.Dayjs> {
    * ```
    */
   static isValid(value: string, format: string): boolean {
-    return dayjs(value, format).format(format) === value;
+    return DateTime.dayjs(value, format).format(format) === value;
   }
 
   /**

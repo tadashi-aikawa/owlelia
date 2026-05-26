@@ -40,6 +40,10 @@ describe("sec2Japanese", () => {
 });
 
 describe("DateTime", () => {
+  afterEach(() => {
+    DateTime.resetLocale();
+  });
+
   describe.each`
     value                                | expected
     ${"2020-02-02"}                      | ${"2020-02-02T00:00:00"}
@@ -71,6 +75,29 @@ describe("DateTime", () => {
       } else {
         expect(actual).toBe(expected);
       }
+    });
+  });
+
+  describe("locale", () => {
+    test("DateTime.setLocale('ja') applies to parse and format", () => {
+      DateTime.setLocale("ja");
+
+      const actual = DateTime.from("2026-05-27(水)", "YYYY-MM-DD(ddd)");
+
+      expect(actual?.format("YYYY-MM-DD(ddd)")).toBe("2026-05-27(水)");
+    });
+
+    test("DateTime.getLocale returns current locale", () => {
+      DateTime.setLocale("ja");
+
+      expect(DateTime.getLocale()).toBe("ja");
+    });
+
+    test("DateTime.resetLocale clears current locale", () => {
+      DateTime.setLocale("ja");
+      DateTime.resetLocale();
+
+      expect(DateTime.getLocale()).toBeUndefined();
     });
   });
 

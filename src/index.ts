@@ -1,4 +1,5 @@
 import { DateTime } from "./bundle/datetime";
+import type { DateTimeLocale } from "./bundle/datetime";
 import { LiquidValue } from "./bundle/values";
 import { Entity } from "./entity";
 import { BaseError } from "./error";
@@ -12,5 +13,6 @@ export {
   DateTime,
   LiquidValue,
 };
+export type { DateTimeLocale };
 export * from "./bundle/utils";
 export * from "./result";
