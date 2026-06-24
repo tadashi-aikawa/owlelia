@@ -29,14 +29,12 @@ git config core.hooksPath hooks
 
 ### Requirements
 
-- Node.js >= 24
-- TypeScript >= 5.6
-- pnpm >= 11.0.8
+- [mise](https://mise.en.dev/)
 
 ### Develop
 
 ```bash
-pnpm install --frozen-lockfile
+pnpm ci
 pnpm build
 pnpm test
 ```
