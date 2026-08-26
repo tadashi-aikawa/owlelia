@@ -1,6 +1,6 @@
 {
   "name": "owlelia",
-  "version": "0.50.0",
+  "version": "0.50.1",
   "description": "TODO",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -38,7 +38,7 @@
     "@biomejs/biome": "^2.3.8",
     "@types/jest": "^30.0.0",
     "babel-jest": "^30.2.0",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
+    "conventional-changelog-conventionalcommits": "^9.3.1",
     "jest": "^30.2.0",
     "mockdate": "^3.0.5",
     "typescript": "^5.9.3"
