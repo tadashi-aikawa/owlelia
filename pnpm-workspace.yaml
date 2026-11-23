@@ -1,7 +1,11 @@
 allowBuilds:
   unrs-resolver: true
-# jest 30はglob 10/13を使い、修正版はglob 14・minimatch 11にしか無い
-# jestが使うのは glob.sync(pattern, opts) だけなので、メジャーを上げて当てる
+  # jest 30.5のjest-haste-mapが使う。prebuiltはoptionalDependenciesで入る
+  # install scriptがnode-gypでビルドするのは npm_config_build_from_source=true のときだけなので、走らせなくてよい
+  "@parcel/watcher": false
+# jest 30はglob 10/13とminimatch 10を使い、修正版はglob 14・minimatch 11にしか無い
+# jestはglobを glob.sync(pattern, opts) でだけ呼び、カバレッジのtest-excludeはminimatchを直接呼ぶ
+# どちらもメジャーを上げたバージョンで動くことを確かめて当てた
 # 外す条件: overridesを消して解決し直しても、glob・minimatchがともに修正版になり pnpm audit が通ること
 overrides:
   "glob@>=9.0.0 <14.0.2": ^14.0.2
