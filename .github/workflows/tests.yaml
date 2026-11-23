@@ -37,7 +37,3 @@ jobs:
           pnpm install
           pnpm pre:push
           pnpm build
-      - uses: codecov/codecov-action@v7
-        if: "matrix.node == '22' && success()"
-        with:
-          files: ./coverage/clover.xml
