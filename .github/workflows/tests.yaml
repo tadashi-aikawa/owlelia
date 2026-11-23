@@ -8,6 +8,9 @@ on:
       - "src/**/*"
       - "*.js"
       - "*.json"
+      - "mise.toml"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
   schedule:
     - cron: "0 0 * * *"
 
@@ -16,21 +19,25 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ["22.x", "24.x"]
+        node: ["22", "24", "26"]
     name: Node ${{ matrix.node }}
+    env:
+      # pnpmはmise.tomlのまま使い、nodeだけを行ごとに差し替える
+      MISE_NODE_VERSION: ${{ matrix.node }}
 
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: jdx/mise-action@v5
         with:
-          node-version: ${{ matrix.node }}
+          install_args: "node pnpm"
+          # 既定のcacheのkeyはMISE_NODE_VERSIONを含まないので、行ごとに分ける
+          cache_key_prefix: mise-v1-node${{ matrix.node }}
       - name: "Install -> Test -> Build"
         run: |
-          npm i -g pnpm@11.0.8
           pnpm install
           pnpm pre:push
           pnpm build
-      - uses: codecov/codecov-action@v4
-        if: "matrix.node == '22.x' && success()"
+      - uses: codecov/codecov-action@v7
+        if: "matrix.node == '22' && success()"
         with:
-          file: ./coverage/clover.xml
+          files: ./coverage/clover.xml
